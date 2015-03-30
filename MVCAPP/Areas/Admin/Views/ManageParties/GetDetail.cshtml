@@ -1,0 +1,123 @@
+﻿@{
+    Layout = null;
+}
+@model ViewModel.PartyInformationModel
+
+<link rel="stylesheet" href="../../Content/button/css/font-awesome.min.css">
+<link rel="stylesheet" href="../../Content/button/css/buttons.css">
+
+<div style="background-color:#fff;">
+    <div style="background-color:#fff;display:block;position:relative; ">
+        &nbsp;&nbsp;&nbsp;
+        @if (Model.partyInfo.partyLogo != null)
+        {
+            <img src="@Model.partyInfo.partyLogo" style="width:150px;height:150px;" class="img-circle" />
+        }
+        else
+        {
+            <img src="~/Content/Images/default.jpg" style="width:150px;height:150px;" class="img-circle" />
+        }
+
+        <div id="party-info" style="display:block; position:absolute;left:200px;top:10px;">
+            <fieldset>
+
+                <div class="editor-label">
+                    <label>社团名称：</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.DisplayFor(m => m.partyInfo.partyName)
+                </div>
+
+
+
+                <div class="editor-label">
+                    <label>社团宗旨：</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.DisplayFor(m => m.partyInfo.partyPurpose)
+                </div>
+
+
+
+                <div class="editor-label">
+                    <label>社团性质：</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.DisplayFor(m => m.partyInfo.partyProperty)
+                </div>
+                <div class="editor-label">
+                    <label>社团使命：</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.DisplayFor(m => m.partyInfo.partyTask)
+                </div>
+
+
+                <div class="editor-label">
+                    <label>建立时间:</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.DisplayFor(m => m.partyInfo.partyFoundingTime)
+
+                </div>
+
+                <div class="editor-label">
+                    <label>社团成员：</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.DisplayFor(m => m.partyInfo.partyProperty)
+                </div>
+
+                <div class="editor-label">
+                    <label>社团简介：</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.DisplayFor(m => m.partyInfo.partyProperty)
+                </div>
+
+            </fieldset>
+        </div>
+
+        @*显示海报信息*@
+
+        <div id="post-info" style="display:block; height:auto; background-color:#fff">
+            @if (Model.listPostInfo.Count() != 0)
+            {
+                <div class="row">
+                    @foreach (var i in Model.listPostInfo)
+                    {
+                        <div class="col-sm-6 col-md-4" style="border:1px;">
+                            <div class="thumbnail">
+                                @if (i.postPhotoURL != null)
+                                {
+                                    <img data-src="holder.js/100%x150" alt="100%x200" src="@i.postPhotoURL" style="height: 150px; width: 100%; display: block;">
+
+                                }
+                                else
+                                {
+                                    <img data-src="holder.js/100%x150" alt="100%x200" src="~/Content/Images/default.jpg" style="height: 150px; width: 100%; display: block;">
+                                }
+
+                                <h2>@i.postName</h2>
+                                <p>时间： @i.postBeginTime ——@i.postEndTime</p>
+                                <p>抢票时间:@i.postTicketBeginTime——@i.postTicketEndTime</p>
+                                <p>票数：@i.postTicketNumber</p>
+                                <p>
+                                    <a href="/Admin/ManageParties/DeletePost?postName=@i.postName&partyName=@i.postPartyName">删除活动</a>
+                                </p>
+                                <hr style="border:none;" />
+                            </div>
+                        </div>
+                    }
+
+                </div><!--/row-->
+            }
+            else
+            {
+                <div style="background-color:#fff;">
+                    <h2>
+                        该社团暂无任何活动！
+                    </h2>
+                </div>
+            }
+        </div>
+    </div>
+
+
+
+</div>
+
+

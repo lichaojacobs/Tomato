@@ -1,0 +1,17 @@
+G:\软件技术基础\网站项目\Tomato\WebService\bin\WebService.dll.config
+G:\软件技术基础\网站项目\Tomato\WebService\bin\WebService.dll
+G:\软件技术基础\网站项目\Tomato\WebService\bin\WebService.pdb
+G:\软件技术基础\网站项目\Tomato\WebService\obj\Debug\WebService.dll
+G:\软件技术基础\网站项目\Tomato\WebService\obj\Debug\WebService.pdb
+C:\Users\li\Desktop\网站项目（2014-8-7）\Tomato\WebService\bin\WebService.dll.config
+C:\Users\li\Desktop\网站项目（2014-8-7）\Tomato\WebService\bin\WebService.dll
+C:\Users\li\Desktop\网站项目（2014-8-7）\Tomato\WebService\bin\WebService.pdb
+C:\Users\li\Desktop\网站项目（2014-8-7）\Tomato\WebService\obj\Debug\WebService.csprojResolveAssemblyReference.cache
+C:\Users\li\Desktop\网站项目（2014-8-7）\Tomato\WebService\obj\Debug\WebService.dll
+C:\Users\li\Desktop\网站项目（2014-8-7）\Tomato\WebService\obj\Debug\WebService.pdb
+C:\Users\li\Desktop\网站项目（2014-8-11）\Tomato\WebService\bin\WebService.dll.config
+C:\Users\li\Desktop\网站项目（2014-8-11）\Tomato\WebService\bin\WebService.dll
+C:\Users\li\Desktop\网站项目（2014-8-11）\Tomato\WebService\bin\WebService.pdb
+C:\Users\li\Desktop\网站项目（2014-8-11）\Tomato\WebService\obj\Debug\WebService.csprojResolveAssemblyReference.cache
+C:\Users\li\Desktop\网站项目（2014-8-11）\Tomato\WebService\obj\Debug\WebService.dll
+C:\Users\li\Desktop\网站项目（2014-8-11）\Tomato\WebService\obj\Debug\WebService.pdb

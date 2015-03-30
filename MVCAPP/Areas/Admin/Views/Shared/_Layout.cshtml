@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!--为移动设备进行优化-->
+    <title>@ViewBag.Title</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../../Content/css/bootstrap.min.css">
+    <script src="~/Scripts/jquery-1.10.2.intellisense.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" href="../../Content/css/unsliderstyle.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="../../Content/js/unslider.js"></script>
+    <script>
+
+        $(function () {
+            $('.banner').unslider();
+        });
+
+        if (window.chrome) {
+            $('.banner li').css('background-size', '100% 100%');
+        }
+
+        $('.banner').unslider({
+            arrows: true,
+            fluid: true,
+            dots: true
+        });
+
+        //  Find any element starting with a # in the URL
+        //  And listen to any click events it fires
+        $('a[href^="#"]').click(function () {
+            //  Find the target element
+            var target = $($(this).attr('href'));
+
+            //  And get its position
+            var pos = target.offset(); // fallback to scrolling to top || {left: 0, top: 0};
+
+            //  jQuery will return false if there's no element
+            //  and your code will throw errors if it tries to do .offset().left;
+            if (pos) {
+                //  Scroll the page
+                $('html, body').animate({
+                    scrollTop: pos.top,
+                    scrollLeft: pos.left
+                }, 1000);
+            }
+
+            //  Don't let them visit the url, we'll scroll you there
+            return false;
+        });
+    </script>
+    <script src="../../Content/js/jquery.event.move.js"></script>
+    <script src="../../Content/js/jquery.event.swipe.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../../Content/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script><!--轮播调用-->
+    <script src="http://unslider.com/unslider.js"></script>
+
+
+</head>
+<body>
+    <ul class="nav nav-tabs nav-justified" role="tablist">
+        <li><a href="/Admin/AdminHome/Index">后台管理首页</a></li>
+        <li><a href="/Admin/ManagePerson/Index">人员管理</a></li>
+        <li><a href="/Admin/ManageParties/Index">社团管理</a></li>
+        <li><a href="/Admin/ManageGoods/Index">店铺管理</a></li>
+        <li><a href="#">文章管理</a></li>
+    </ul>
+
+    <div>
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Tomato Right Reserve</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

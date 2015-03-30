@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "管理用户";
+}
+@model  UserInfoList
+<!DOCTYPE html>
+
+    @using (Html.BeginForm())
+    {
+        if (Model.userinfoList.Count() != null)
+        {
+            
+            <table id="dg" style="width:auto; align-content:center; " cellpadding="20">
+                <tr>
+                    <th width="100px">邮箱（登陆账号）</th>
+                    <th width="100px">用户名</th>
+                    <th width="100px">密码</th>
+                    <th width="100px">昵称</th>
+                    <th width="100px">角色</th>
+                    <th width="100px">用户状态</th>
+                    <th width="100px"></th>
+                    <th width="100px"></th>
+                </tr>
+                @foreach (var i in Model.userinfoList)
+                {
+                    
+                    <tr>
+                        <td>@Html.DisplayFor(m => i.email)</td>
+                        <td>@Html.DisplayFor(m => i.username)</td>
+                        <td>@Html.DisplayFor(m => i.password)</td>
+                        <td>@Html.DisplayFor(m => i.nickname)</td>
+                        <td>@Html.DisplayFor(m => i.Roles)</td>
+                        <td>@Html.DisplayFor(m => i.UserState)</td>
+                        @*<td><button name="Block" value="@i.email" onclick="window.location = '/Admin/ManagePerson/BlockUser'">封锁该用户</button></td>*@
+                        @if(i.UserState=="已激活")
+                        { 
+                        <td>@Html.ActionLink("封锁该用户", "BlockUser", new {  emailFromView = i.email })</td>
+                        }
+                        else
+                        {
+                            <td>@Html.ActionLink("激活该用户", "BlockUser", new { emailFromView = i.email })</td>
+                        }
+                        <td>@Html.ActionLink("删除该用户", "DeleteUser", new { emailFromView = i.email }, null)</td>
+                    </tr>
+                    
+                }
+            </table>
+
+        }
+        else
+        {
+            <h2>暂无需要管理的用户</h2>
+        
+        }
+    }
+
+
+<div class="pager">
+
+    @Html.pagelinks(Model.pageinfo, X => Url.Action("Index", new { page = X }))
+
+</div>
+
+

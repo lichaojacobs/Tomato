@@ -1,0 +1,217 @@
+﻿@{
+    ViewBag.Title = "AddActivities";
+}
+
+@model ViewModel.PostInfo
+
+<link href="~/Content/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<link href="~/Content/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+
+<!--导航栏-->
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Tomato</a>
+        </div>
+        <!--[logo]>
+        <a class="navbar-brand" href="#">
+        </a> <!-->
+        <ul class="nav navbar-nav " role="tablist">
+            <li><a href="/Home/Index">首页</a></li>
+            <li><a href="/PartyActivities/PartyIndex">社团互动</a></li>
+            <li><a href="/MarketDownstairs/MarketIndex">楼下小铺</a></li>
+            <li><a href="#">新生指南</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            @if (User.IsInRole("社团"))
+            {
+                // [@Html.ActionLink("个人中心", "PersonalInfo", "Account")]
+                //[ @Html.ActionLink("注销", "LogOff", "Account") ]
+                <li style="color:white">
+                    <a>欢迎<small>@User.Identity.Name !</small></a>
+                </li>
+                <li class="active"><a href="/PartyActivities/SetPartyInfo?partyName=@User.Identity.Name">社团中心</a></li>
+                <li><a href="/Account/LogOff">注销</a></li>
+
+
+
+            }
+            @if (!User.IsInRole("社团"))
+            {
+
+                <li><a href="/Account/PartyLoginIndex">登陆/注册</a></li>
+
+            }
+        </ul>
+    </div>
+</nav>
+
+<div class="container" style="background-color:#fff;height:900px;">
+
+
+    <div style="height:600px;display:block; position:relative; top:60px; ">
+        @using (Html.BeginForm("AddActivities", "PartyActivities", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+        {
+
+            @*@Html.HiddenFor(m => m.shopId)*@
+            @Html.HiddenFor(m => m.postPartyName)
+
+            <div style="display:block;position:relative;left:20px;top:20px;">
+                <div class="editor-field">
+                    <label>活动名称：</label>
+                    @Html.TextBoxFor(model => model.postName, new { @class = "form-control", placeholder = "活动名称", style = "width:500px;height:50px" })
+                </div>
+
+                <div class="form-group">
+                    <div>
+                        <label>&nbsp;&nbsp;&nbsp;&nbsp;活动开始时间：</label>
+                    </div>
+                    <div class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-MM-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        @Html.TextBoxFor(model => model.postBeginTime, new { @class = "form-control", placeholder = "活动开始时间", style = "width:500px;height:50px;" })
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                    <input type="hidden" id="dtp_input2" value="" /><br />
+                </div>
+
+                <div class="form-group">
+                    <div>
+                        <label>&nbsp;&nbsp;&nbsp;&nbsp;活动结束时间：</label>
+                    </div>
+                    <div class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-MM-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        @Html.TextBoxFor(model => model.postEndTime, new { @class = "form-control", placeholder = "活动结束时间", style = "width:500px;height:50px", @readonly = "True" })
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                    <input type="hidden" id="dtp_input2" value="" /><br />
+                </div>
+
+                <div class="editor-label">
+                    <label>网上票数：</label>
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.postEndTime, new { @class = "form-control", placeholder = "网上票数", style = "width:500px;height:50px" })
+                </div>
+
+                <div class="form-group">
+                    <div>
+                        <label>&nbsp;&nbsp;&nbsp;&nbsp;网上抢票开始时间：</label>
+                    </div>
+                    <div class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-MM-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        @Html.TextBoxFor(model => model.postTicketBeginTime, new { @class = "form-control", placeholder = "网上抢票开始时间", style = "width:500px;height:50px", @readonly = "True" })
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                    <input type="hidden" id="dtp_input2" value="" /><br />
+                </div>
+
+                <div class="form-group">
+                    <div>
+                        <label>&nbsp;&nbsp;&nbsp;&nbsp;网上抢票结束时间：</label>
+                    </div>
+                    <div class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-MM-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                        @Html.TextBoxFor(model => model.postTicketEndTime, new { @class = "form-control", placeholder = "网上抢票结束时间", style = "width:500px;height:50px", @readonly = "True" })
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                    <input type="hidden" id="dtp_input2" value="" /><br />
+                </div>
+
+                <div>
+                    <label>
+                        上传照片：
+                    </label>
+                    <div class="file-box">
+                        <input type='text' name='textfield' id='textfield' class='txt' />
+                        <input type='button' class='btn' value='浏览...' />
+                        <input type="file" name="image" class="file" id="fileField" size="28" onchange="document.getElementById('textfield').value=this.value" />
+                        @*<input type="submit" name="submit" class="btn" value="上传" />*@
+
+                    </div>
+
+                </div>
+                <br />
+                <div class="editor-field">
+                    <button class="btn btn-lg btn-primary">确定</button>
+                </div>
+            </div>
+
+
+        }
+
+    </div>
+
+</div>
+
+
+
+<style type="text/css">
+    .file-box {
+        position: relative;
+        width: 340px;
+    }
+
+    .txt {
+        height: 30px;
+        border: 1px solid #cdcdcd;
+        width: 180px;
+    }
+
+
+
+    .file {
+        position: absolute;
+        top: 0;
+        right: 80px;
+        height: 24px;
+        filter: alpha(opacity:0);
+        opacity: 0;
+        width: 260px;
+    }
+</style>
+
+<script src="~/Content/js/jquery-1.10.2.min.js"></script>
+<script src="~/Content/js/bootstrap.min.js"></script>
+<script src="~/Content/js/bootstrap-datetimepicker.js"></script>
+<script src="~/Content/js/bootstrap-datetimepicker.zh-CN.js"></script>
+
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1
+    });
+    $('.form_date').datetimepicker({
+        language: 'fr',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
+    $('.form_time').datetimepicker({
+        language: 'fr',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 1,
+        minView: 0,
+        maxView: 1,
+        forceParse: 0
+    });
+</script>

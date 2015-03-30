@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "ManageParties";
+}
+
+@model ViewModel.PartyInfoList
+
+<div>
+    <table id="dg" style="width:auto; align-content:center " align="center">
+        <tr>
+            <th width="100px">社团名称</th>
+            <th width="100px">社团宗旨</th>
+            <th width="100px">社团成立时间</th>
+            <th width="100px">社团成员</th>
+            <th width="100px"></th>
+            <th width="100px"></th>
+            <th width="100px"></th>
+
+        </tr>
+        @foreach (var i in Model.PartyList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => i.PartyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => i.Property)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => i.FoundingTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => i.Members)
+                </td>
+                <td>
+
+                    <a href="/Admin/ManageParties/BlockParty?partyName=@i.PartyName">封锁</a>
+
+                    <a href="/Admin/ManageParties/CertifyParty?partyName=@i.PartyName">认证</a>
+                    
+                </td>
+                <td>
+                    <a href="/Admin/ManageParties/GetDetail?partyName=@i.PartyName">详细</a>
+
+                </td>
+                <td>
+
+                    <a href="/Admin/ManageParties/DeleteParty?partyName=@i.PartyName">删除该社团</a>
+                </td>
+
+            </tr>
+        }
+    </table>
+</div>
+<div class="pager">
+
+    @Html.pagelinks(Model.pageinfo, X => Url.Action("Index", new { page = X }))
+
+</div>

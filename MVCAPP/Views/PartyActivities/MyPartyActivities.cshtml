@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "MyPartyActivities";
+}
+@model List<ViewModel.PostInfo>
+
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Tomato</a>
+        </div>
+        <!--[logo]>
+        <a class="navbar-brand" href="#">
+        </a> <!-->
+        <ul class="nav navbar-nav " role="tablist">
+            <li><a href="/Home/Index">首页</a></li>
+            <li><a href="/PartyActivities/PartyIndex">社团互动</a></li>
+            <li><a href="/MarketDownstairs/MarketIndex">楼下小铺</a></li>
+            <li><a href="#">新生指南</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            @if (User.IsInRole("社团"))
+            {
+                // [@Html.ActionLink("个人中心", "PersonalInfo", "Account")]
+                //[ @Html.ActionLink("注销", "LogOff", "Account") ]
+                <li style="color:white">
+                    <a>欢迎<small>@User.Identity.Name !</small></a>
+                </li>
+                <li class="active"><a href="/PartyActivities/SetPartyInfo?partyName=@User.Identity.Name">社团中心</a></li>
+                <li><a href="/Account/LogOff">注销</a></li>
+
+
+
+            }
+            @if (!User.IsInRole("社团"))
+            {
+
+                <li><a href="/Account/PartyLoginIndex">登陆/注册</a></li>
+
+            }
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container" style="background-color:#fff">
+    <div style="display:block;position:relative;top:60px;">
+
+
+        @Html.Action("MyPartyInformation", new { partyName = User.Identity.Name })
+
+        @*导航菜单*@
+        <ul class="nav nav-tabs" contenteditable="true" style="background-color:#eee7e7">
+            <li id="mygoodli"><a onclick="window.location = '/PartyActivities/SetPartyInfo?partyName=@User.Identity.Name'" role="button">基本信息设置</a></li>
+
+            <li id="myactivities" class="active"><a onclick="window.location = '/PartyActivities/MyPartyActivities?partyName=@User.Identity.Name'" role="button">社团活动</a></li>
+
+            <li id="mynoticeli"><a onclick="window.location = '/PartyActivities/Notice?partyName=@User.Identity.Name'" role="button">通知</a></li>
+
+            <li id="myupdatepassword"><a onclick="window.location = '/PartyActivities/UpdatePassword?partyName=@ViewBag.partyName'" role="button">修改密码</a></li>
+
+        </ul>
+
+        @*显示海报信息*@
+
+        <div id="post-info" style="display:block; height:auto; background-color:#fff">
+            @if (Model.Count()!=0)
+        {
+        <div class="row">
+            @foreach (var i in Model)
+                {
+        <div class="col-sm-6 col-md-4" style="border:1px;">
+            <div class="thumbnail">
+                @if (i.postPhotoURL != null)
+                            {
+                            <img data-src="holder.js/100%x150" alt="100%x200" src="@i.postPhotoURL" style="height: 150px; width: 100%; display: block;">
+
+                            }
+                            else
+                            {
+                            <img data-src="holder.js/100%x150" alt="100%x200" src="~/Content/Images/default.jpg" style="height: 150px; width: 100%; display: block;">
+                            }
+
+                <h2>@i.postName</h2>
+                <p>时间： @i.postBeginTime ——@i.postEndTime</p>
+                <p>抢票时间:@i.postTicketBeginTime——@i.postTicketEndTime</p>
+                <p>票数：@i.postTicketNumber</p>
+                <hr style="border:none;" />
+            </div>
+        </div>
+                }
+
+        </div><!--/row-->
+        }
+        else
+        {
+        <div style="background-color:#fff;">
+            <h2>
+                该社团暂无任何活动！
+            </h2>
+        </div>
+        }
+
+        </div>
+
+    </div>
+</div>

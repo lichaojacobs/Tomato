@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TomatoModelStoreContainer" CdmEntityContainer="TomatoEntities">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="TomatoModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T001账号表">
+      <EntityTypeMapping TypeName="TomatoModel.T001账号表">
+        <MappingFragment StoreEntitySet="T001账号表">
+          <ScalarProperty Name="PhotoUrl" ColumnName="PhotoUrl" />
+          <ScalarProperty Name="UserState" ColumnName="UserState" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="NickName" ColumnName="NickName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T002验证表">
+      <EntityTypeMapping TypeName="TomatoModel.T002验证表">
+        <MappingFragment StoreEntitySet="T002验证表">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="RiseDateTime" ColumnName="RiseDateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T003用户角色表">
+      <EntityTypeMapping TypeName="TomatoModel.T003用户角色表">
+        <MappingFragment StoreEntitySet="T003用户角色表">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UserAuthority" ColumnName="UserAuthority" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T006店铺信息表">
+      <EntityTypeMapping TypeName="TomatoModel.T006店铺信息表">
+        <MappingFragment StoreEntitySet="T006店铺信息表">
+          <ScalarProperty Name="MallID" ColumnName="MallID" />
+          <ScalarProperty Name="WeChat" ColumnName="WeChat" />
+          <ScalarProperty Name="QQ" ColumnName="QQ" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Introduction" ColumnName="Introduction" />
+          <ScalarProperty Name="Owners" ColumnName="Owners" />
+          <ScalarProperty Name="Contaction" ColumnName="Contaction" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T007店铺货物表">
+      <EntityTypeMapping TypeName="TomatoModel.T007店铺货物表">
+        <MappingFragment StoreEntitySet="T007店铺货物表">
+          <ScalarProperty Name="ShopID" ColumnName="ShopID" />
+          <ScalarProperty Name="GoodID" ColumnName="GoodID" />
+          <ScalarProperty Name="GoodName" ColumnName="GoodName" />
+          <ScalarProperty Name="GoodPhoto" ColumnName="GoodPhoto" />
+          <ScalarProperty Name="GoodIntroduction" ColumnName="GoodIntroduction" />
+          <ScalarProperty Name="GoodNumber" ColumnName="GoodNumber" />
+          <ScalarProperty Name="GoodPrice" ColumnName="GoodPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T004社团信息表">
+      <EntityTypeMapping TypeName="TomatoModel.T004社团信息表">
+        <MappingFragment StoreEntitySet="T004社团信息表">
+          <ScalarProperty Name="PartyLogoUrl" ColumnName="PartyLogoUrl" />
+          <ScalarProperty Name="Describe" ColumnName="Describe" />
+          <ScalarProperty Name="Members" ColumnName="Members" />
+          <ScalarProperty Name="FoundingTime" ColumnName="FoundingTime" />
+          <ScalarProperty Name="Activities" ColumnName="Activities" />
+          <ScalarProperty Name="Task" ColumnName="Task" />
+          <ScalarProperty Name="Property" ColumnName="Property" />
+          <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+          <ScalarProperty Name="PartyName" ColumnName="PartyName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T005票务表">
+      <EntityTypeMapping TypeName="TomatoModel.T005票务表">
+        <MappingFragment StoreEntitySet="T005票务表">
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="PostName" ColumnName="PostName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T008海报信息表">
+      <EntityTypeMapping TypeName="TomatoModel.T008海报信息表">
+        <MappingFragment StoreEntitySet="T008海报信息表">
+          <ScalarProperty Name="PartyName" ColumnName="PartyName" />
+          <ScalarProperty Name="TicketEndTime" ColumnName="TicketEndTime" />
+          <ScalarProperty Name="TicketBeginTime" ColumnName="TicketBeginTime" />
+          <ScalarProperty Name="TicketNumber" ColumnName="TicketNumber" />
+          <ScalarProperty Name="PostEndTime" ColumnName="PostEndTime" />
+          <ScalarProperty Name="PostBeginTime" ColumnName="PostBeginTime" />
+          <ScalarProperty Name="PhotosURL" ColumnName="PhotosURL" />
+          <ScalarProperty Name="PostName" ColumnName="PostName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T009社团账号表">
+      <EntityTypeMapping TypeName="TomatoModel.T009社团账号表">
+        <MappingFragment StoreEntitySet="T009社团账号表">
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PartyName" ColumnName="PartyName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

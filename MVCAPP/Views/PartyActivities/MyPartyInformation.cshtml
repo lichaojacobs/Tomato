@@ -1,0 +1,79 @@
+﻿@{
+    Layout = null;
+}
+@model ViewModel.PartyInformationModel
+
+<link rel="stylesheet" href="../../Content/button/css/font-awesome.min.css">
+<link rel="stylesheet" href="../../Content/button/css/buttons.css">
+
+<div  style="background-color:#fff;">
+    <div style="background-color:#fff;display:block;position:relative; ">
+        &nbsp;&nbsp;&nbsp;
+       @if (Model.partyInfo.partyLogo != null)
+       {
+           <img src="@Model.partyInfo.partyLogo" style="width:150px;height:150px;" class="img-circle" />
+       }
+       else
+       {
+            <img src="~/Content/Images/default.jpg" style="width:150px;height:150px;" class="img-circle" />
+       }
+        
+        <div id="party-info" style="display:block; position:absolute;left:200px;top:10px;">
+            <fieldset>
+
+                <div class="editor-label">
+                    <label>社团名称：</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.DisplayFor(m => m.partyInfo.partyName)
+                </div>
+
+
+
+                <div class="editor-label">
+                    <label>社团宗旨：</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.DisplayFor(m => m.partyInfo.partyPurpose)
+                </div>
+
+
+
+                <div class="editor-label">
+                    <label>社团性质：</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.DisplayFor(m => m.partyInfo.partyProperty)
+                </div>
+                <div class="editor-label">
+                    <label>社团使命：</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.DisplayFor(m => m.partyInfo.partyTask)
+                </div>
+
+               
+                <div class="editor-label">
+                    <label>建立时间:</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.DisplayFor(m => m.partyInfo.partyFoundingTime)
+
+                </div>
+                
+            </fieldset>
+
+        </div>
+
+        @*添加活动div*@
+        <div style="display:block;position:absolute;right:20px;top:10px;">
+
+            <a class="button button-circle button-primary" onclick="window.location = '/PartyActivities/AddActivities'" role="button">添加活动</a>
+
+        </div>
+      
+    </div>
+
+
+  
+   
+</div>
+
+
+
+

@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TomatoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="T001账号表">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NickName" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserState" Type="nvarchar" MaxLength="10" />
+    <Property Name="PhotoUrl" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="T002验证表">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="RiseDateTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="T003用户角色表">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserAuthority" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T004社团信息表">
+    <Key>
+      <PropertyRef Name="PartyName" />
+    </Key>
+    <Property Name="PartyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Purpose" Type="nvarchar" MaxLength="50" />
+    <Property Name="Property" Type="nvarchar" MaxLength="50" />
+    <Property Name="Task" Type="nvarchar" MaxLength="50" />
+    <Property Name="Activities" Type="nvarchar(max)" />
+    <Property Name="FoundingTime" Type="nvarchar" MaxLength="50" />
+    <Property Name="Members" Type="nvarchar" MaxLength="50" />
+    <Property Name="Describe" Type="nvarchar" MaxLength="50" />
+    <Property Name="PartyLogoUrl" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="T005票务表">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="PostName" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PostName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T006店铺信息表">
+    <Key>
+      <PropertyRef Name="MallID" />
+    </Key>
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Introduction" Type="nvarchar(max)" />
+    <Property Name="Owners" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contaction" Type="nvarchar" MaxLength="50" />
+    <Property Name="QQ" Type="nvarchar" MaxLength="50" />
+    <Property Name="WeChat" Type="nvarchar" MaxLength="50" />
+    <Property Name="MallID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T007店铺货物表">
+    <Key>
+      <PropertyRef Name="GoodID" />
+    </Key>
+    <Property Name="ShopID" Type="int" Nullable="false" />
+    <Property Name="GoodName" Type="nvarchar" MaxLength="50" />
+    <Property Name="GoodPhoto" Type="nvarchar(max)" />
+    <Property Name="GoodIntroduction" Type="nvarchar(max)" />
+    <Property Name="GoodNumber" Type="int" />
+    <Property Name="GoodPrice" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="GoodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T008海报信息表">
+    <Key>
+      <PropertyRef Name="PostName" />
+    </Key>
+    <Property Name="PostName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PhotosURL" Type="nvarchar(max)" />
+    <Property Name="PostBeginTime" Type="nvarchar" MaxLength="50" />
+    <Property Name="PostEndTime" Type="nvarchar" MaxLength="50" />
+    <Property Name="TicketNumber" Type="int" />
+    <Property Name="TicketBeginTime" Type="nvarchar" MaxLength="50" />
+    <Property Name="TicketEndTime" Type="nvarchar" MaxLength="50" />
+    <Property Name="PartyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T009社团账号表">
+    <Key>
+      <PropertyRef Name="PartyName" />
+    </Key>
+    <Property Name="PartyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="State" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <Association Name="FK_T002验证表">
+    <End Role="T001账号表" Type="Self.T001账号表" Multiplicity="1" />
+    <End Role="T002验证表" Type="Self.T002验证表" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="T001账号表">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="T002验证表">
+        <PropertyRef Name="Email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T003用户角色表">
+    <End Role="T001账号表" Type="Self.T001账号表" Multiplicity="1" />
+    <End Role="T003用户角色表" Type="Self.T003用户角色表" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="T001账号表">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="T003用户角色表">
+        <PropertyRef Name="Email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T004社团信息表">
+    <End Role="T009社团账号表" Type="Self.T009社团账号表" Multiplicity="1" />
+    <End Role="T004社团信息表" Type="Self.T004社团信息表" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="T009社团账号表">
+        <PropertyRef Name="PartyName" />
+      </Principal>
+      <Dependent Role="T004社团信息表">
+        <PropertyRef Name="PartyName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T005票务表T001">
+    <End Role="T001账号表" Type="Self.T001账号表" Multiplicity="1" />
+    <End Role="T005票务表" Type="Self.T005票务表" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T001账号表">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="T005票务表">
+        <PropertyRef Name="UserEmail" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T005票务表T008">
+    <End Role="T008海报信息表" Type="Self.T008海报信息表" Multiplicity="1" />
+    <End Role="T005票务表" Type="Self.T005票务表" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T008海报信息表">
+        <PropertyRef Name="PostName" />
+      </Principal>
+      <Dependent Role="T005票务表">
+        <PropertyRef Name="PostName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T006店铺信息表">
+    <End Role="T001账号表" Type="Self.T001账号表" Multiplicity="1" />
+    <End Role="T006店铺信息表" Type="Self.T006店铺信息表" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T001账号表">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="T006店铺信息表">
+        <PropertyRef Name="Owners" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T007ShopGoods_T006店铺信息表">
+    <End Role="T006店铺信息表" Type="Self.T006店铺信息表" Multiplicity="1" />
+    <End Role="T007店铺货物表" Type="Self.T007店铺货物表" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T006店铺信息表">
+        <PropertyRef Name="MallID" />
+      </Principal>
+      <Dependent Role="T007店铺货物表">
+        <PropertyRef Name="ShopID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_T008海报信息表">
+    <End Role="T004社团信息表" Type="Self.T004社团信息表" Multiplicity="1" />
+    <End Role="T008海报信息表" Type="Self.T008海报信息表" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T004社团信息表">
+        <PropertyRef Name="PartyName" />
+      </Principal>
+      <Dependent Role="T008海报信息表">
+        <PropertyRef Name="PartyName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TomatoModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T001账号表" EntityType="Self.T001账号表" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T002验证表" EntityType="Self.T002验证表" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T003用户角色表" EntityType="Self.T003用户角色表" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T004社团信息表" EntityType="Self.T004社团信息表" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T005票务表" EntityType="Self.T005票务表" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T006店铺信息表" EntityType="Self.T006店铺信息表" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T007店铺货物表" EntityType="Self.T007店铺货物表" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T008海报信息表" EntityType="Self.T008海报信息表" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T009社团账号表" EntityType="Self.T009社团账号表" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_T002验证表" Association="Self.FK_T002验证表">
+      <End Role="T001账号表" EntitySet="T001账号表" />
+      <End Role="T002验证表" EntitySet="T002验证表" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T003用户角色表" Association="Self.FK_T003用户角色表">
+      <End Role="T001账号表" EntitySet="T001账号表" />
+      <End Role="T003用户角色表" EntitySet="T003用户角色表" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T004社团信息表" Association="Self.FK_T004社团信息表">
+      <End Role="T009社团账号表" EntitySet="T009社团账号表" />
+      <End Role="T004社团信息表" EntitySet="T004社团信息表" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T005票务表T001" Association="Self.FK_T005票务表T001">
+      <End Role="T001账号表" EntitySet="T001账号表" />
+      <End Role="T005票务表" EntitySet="T005票务表" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T005票务表T008" Association="Self.FK_T005票务表T008">
+      <End Role="T008海报信息表" EntitySet="T008海报信息表" />
+      <End Role="T005票务表" EntitySet="T005票务表" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T006店铺信息表" Association="Self.FK_T006店铺信息表">
+      <End Role="T001账号表" EntitySet="T001账号表" />
+      <End Role="T006店铺信息表" EntitySet="T006店铺信息表" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T007ShopGoods_T006店铺信息表" Association="Self.FK_T007ShopGoods_T006店铺信息表">
+      <End Role="T006店铺信息表" EntitySet="T006店铺信息表" />
+      <End Role="T007店铺货物表" EntitySet="T007店铺货物表" />
+    </AssociationSet>
+    <AssociationSet Name="FK_T008海报信息表" Association="Self.FK_T008海报信息表">
+      <End Role="T004社团信息表" EntitySet="T004社团信息表" />
+      <End Role="T008海报信息表" EntitySet="T008海报信息表" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

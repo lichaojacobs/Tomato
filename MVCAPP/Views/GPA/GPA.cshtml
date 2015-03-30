@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "GPA";
+}
+@model ViewModel.GPAModel
+
+   
+
+    <!--导航栏-->
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Tomato</a>
+            </div>
+            <!--[logo]>
+            <a class="navbar-brand" href="#">
+            </a> <!-->
+            <ul class="nav navbar-nav " role="tablist">
+                <li class="active"><a href="/Home/Index">首页</a></li>
+                <li><a href="/PartyActivities/PartyIndex">社团互动</a></li>
+                <li><a href="/MarketDownstairs/MarketIndex">楼下小铺</a></li>
+                <li><a href="#">新生指南</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                @if (User.IsInRole("普通用户"))
+                {
+                    // [@Html.ActionLink("个人中心", "PersonalInfo", "Account")]
+                    //[ @Html.ActionLink("注销", "LogOff", "Account") ]
+                    <li style="color:white">
+                        <a>欢迎<small>@User.Identity.Name !</small></a>
+                    </li>
+                    <li><a href="/Account/PersonalInfo">个人中心</a></li>
+                    <li><a href="/Account/LogOff">注销</a></li>
+
+
+
+                }
+                @if (!User.IsInRole("普通用户"))
+                {
+
+                    <li><a href="/Account/Reviselogin">登陆/注册</a></li>
+
+                }
+            </ul>
+
+
+        </div>
+    </nav>
+
+    <div class="container" style="background-color:#fff;height:300px;">
+        <div style="display:block;position:relative;top:70px;">
+
+            @using (Html.BeginForm())
+            {
+                <div class="form-group">
+                    <label for="exampleInputAccount1">办公网账号</label>
+
+
+                    @Html.TextBoxFor(m => m.uid, new { Class = "form-control", id = "exampleInputPassword1", placeholder = "Enter Account" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">密码</label>
+                    @Html.TextBoxFor(m => m.password, new { type = "password", Class = "form-control", id = "exampleInputPassword1", placeholder = "Password" })
+
+
+                </div>
+
+
+                <input type="submit" class="btn btn-default" value="计算GPA" />
+            }
+        </div>
+
+        </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    @*<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>*@
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    
+
+
+
+
+
+

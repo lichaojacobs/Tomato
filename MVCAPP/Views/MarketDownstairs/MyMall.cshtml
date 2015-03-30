@@ -1,0 +1,201 @@
+﻿@{
+    ViewBag.Title = "我的商店";
+}
+@model ViewModel.MyMallInfo
+
+<link rel="stylesheet" href="../../Content/button/css/font-awesome.min.css">
+<link rel="stylesheet" href="../../Content/button/css/buttons.css">
+<script src="~/Content/JscrollPane/script/jquery.jscrollpane.min.js"></script>
+<script src="~/Content/JscrollPane/script/jquery.mousewheel.js"></script>
+<link href="~/Content/JscrollPane/style/jquery.jscrollpane.css" rel="stylesheet" />
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Tomato</a>
+        </div>
+        <!--[logo]>
+        <a class="navbar-brand" href="#">
+        </a> <!-->
+        <ul class="nav navbar-nav " role="tablist">
+            <li><a href="/Home/Index">首页</a></li>
+            <li><a href="/PartyActivities/PartyIndex">社团互动</a></li>
+            <li><a href="/MarketDownstairs/MarketIndex">楼下小铺</a></li>
+            <li><a href="#">新生指南</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            @if (User.IsInRole("普通用户"))
+            {
+                // [@Html.ActionLink("个人中心", "PersonalInfo", "Account")]
+                //[ @Html.ActionLink("注销", "LogOff", "Account") ]
+                <li style="color:white">
+                    <a>欢迎<small>@User.Identity.Name !</small></a>
+                </li>
+                <li class="active"><a href="/MarketDownstairs/MyMall">我的商店</a></li>
+                <li><a href="/Account/LogOff">注销</a></li>
+
+            }
+            @if (!User.IsInRole("普通用户"))
+            {
+
+                <li><a href="/Account/Reviselogin">登陆/注册</a></li>
+
+            }
+        </ul>
+
+
+
+    </div>
+</nav>
+
+
+<div class="container">
+    <div style="background-color:#fff;display:block;position:relative; top:60px;">
+        &nbsp;&nbsp;&nbsp;
+        <img src="~/Content/Images/MarketDefault.jpg" style="width:150px;height:150px;" class="img-circle" />
+        <div id="mall-info" style="display:block; position:absolute;left:200px;top:10px;">
+            <fieldset>
+                @Html.HiddenFor(m => m.MallId)
+                @Html.HiddenFor(m => m.Owner)
+
+                <div class="editor-label">
+                    <label>店名：</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.DisplayFor(m => m.MallName)
+                </div>
+
+
+
+                <div class="editor-label">
+                    <label>电话：</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.DisplayFor(m => m.PhoneNumber)
+                </div>
+
+
+
+                <div class="editor-label">
+                    <label>QQ:</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.DisplayFor(m => m.QQ)
+
+                </div>
+
+
+
+                <div class="editor-label">
+                    <label>微信：</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.DisplayFor(m => m.WeChat)
+                </div>
+                <div class="editor-label">
+                    <button onclick="changeUserData()" class="btn btn-primary">更改信息</button>
+                </div>
+            </fieldset>
+
+        </div>
+
+        @using (Html.BeginForm("MyMall", "MarketDownstairs", FormMethod.Post))
+        {
+            @Html.HiddenFor(m => m.MallId)
+            @Html.HiddenFor(m => m.Owner)
+            <div id="mall-infoform" style="display:none; position:absolute;left:200px;top:10px;">
+                <fieldset>
+
+
+                    <div class="editor-label">
+                        <label>店名：</label>
+                        &nbsp;&nbsp;&nbsp;
+                        @Html.EditorFor(m => m.MallName)
+                    </div>
+
+
+                    <div class="editor-label">
+                        <label>电话：</label>
+                        &nbsp;&nbsp;&nbsp;
+                        @Html.EditorFor(m => m.PhoneNumber)
+                    </div>
+
+
+
+                    <div class="editor-label">
+
+                        <label>QQ:</label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        @Html.EditorFor(m => m.QQ)
+
+                    </div>
+
+
+                    <div class="editor-label">
+                        <label>微信：</label>
+                        &nbsp;&nbsp;&nbsp;
+                        @Html.EditorFor(m => m.WeChat)
+                    </div>
+                    <div class="editor-label">
+                        <button type="submit" class="btn btn-primary">完成修改</button>
+                    </div>
+                </fieldset>
+            </div>
+
+        }
+
+        <div style="display:block;position:absolute;right:20px;top:10px;">
+
+            <a class="button button-circle button-primary" onclick="window.location = '/MarketDownstairs/UploadGood'" role="button">上传货物</a>
+
+        </div>
+
+        @*导航菜单*@
+        <ul class="nav nav-tabs" contenteditable="true" style="background-color:#eee7e7">
+            <li id="mygoodli" class="active"><a onclick="showgoods()" role="button">我的货物</a></li>
+
+            <li id="mynoticeli"><a onclick="showmessage()" role="button">通知</a></li>
+
+
+        </ul>
+
+
+        @*显示我的货物*@
+
+        <div id="goods" aria-multiline="True" style="overflow:scroll;height:500px;">
+            @Html.Action("GetMyMallGoods")
+        </div>
+
+        @*显示消息*@
+        <div id="notice" style="display:none;">
+            @Html.Partial("Notice")
+        </div>
+
+    </div>
+
+
+</div>
+
+<script type="text/javascript">
+    function changeUserData() {
+        document.getElementById("mall-info").style.display = "none";
+        document.getElementById("mall-infoform").style.display = "block";
+    }
+    function showmessage() {
+        document.getElementById("goods").style.display = "none";
+        document.getElementById("notice").style.display = "block";
+        document.getElementById("mygoodli").className = "";
+        document.getElementById("mynoticeli").className = "active"
+    }
+    function showgoods() {
+        document.getElementById("notice").style.display = "none";
+        document.getElementById("goods").style.display = "block";
+        document.getElementById("mynoticeli").className = "";
+        document.getElementById("mygoodli").className = "active";
+
+    }
+
+</script>

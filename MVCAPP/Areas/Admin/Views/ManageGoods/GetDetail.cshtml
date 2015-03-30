@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "GetDetail";
+}
+@model ViewModel.GoodDetailModel
+<div class="left">
+    <div class="form-group">
+        <label>商品名称</label>
+        @Html.DisplayFor(m => m.MallGood.GoodName)
+
+    </div>
+    <div class="form-group">
+        <label>商品介绍</label>
+        @Html.DisplayFor(m => m.MallGood.GoodIntroduction)
+    </div>
+    <div class="form-group">
+        <label>商品数量</label>
+        @Html.DisplayFor(m => m.MallGood.GoodNumber)
+    </div>
+    <div class="form-group">
+        <label>商品照片</label>
+        <img src="@Model.MallGood.GoodPhoto" style="width:100px;height:100px" />
+    </div>
+    <div class="form-group">
+        <label>商品价格（元）</label>
+        @Html.DisplayFor(m => m.MallGood.GoodPrice)
+    </div>
+</div>
+
+<div class="right" style="display:block;position:absolute;left:300px;top:100px;">
+    <div class="form-group">
+        <label>商店名：</label>
+        @Html.DisplayFor(m => m.MallInfo.Name)
+    </div>
+    <div class="form-group">
+        <label>店铺老板:</label>
+        @Html.DisplayFor(m => m.MallInfo.Owners)
+    </div>
+    <div class="form-group">
+        <label>QQ:</label>
+        @Html.DisplayFor(m => m.MallInfo.QQ)
+    </div>
+    <div class="form-group">
+        <label>微信号：</label>
+        @Html.DisplayFor(m => m.MallInfo.WeChat)
+    </div>
+    <div class="form-group">
+        <label>联系电话：</label>
+        @Html.DisplayFor(m => m.MallInfo.Contaction)
+    </div>
+</div>
+

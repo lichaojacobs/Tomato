@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "玩会吧-管理后台";
+}
+<div align="right">
+    @*到时把用户改过来*@
+    @if (User.IsInRole("管理员"))
+    {
+        <text >欢迎管理员 <strong>@User.Identity.Name</strong>!
+        [ @Html.ActionLink("注销", "LogOff", "AdminAccount") ]</text>
+    }
+    @if (!User.IsInRole("管理员"))
+    {
+        
+        <button type="button" class="btn btn-default" onclick="window.location='/Admin/AdminAccount/Login'">登陆</button>
+    }
+</div>
+
+
+<h2>这里是管理员后台页面</h2>

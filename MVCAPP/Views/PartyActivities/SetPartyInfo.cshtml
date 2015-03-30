@@ -1,0 +1,178 @@
+﻿@{
+    ViewBag.Title = "SetPartyInfo";
+}
+
+@model  ViewModel.PartyInfo
+
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Tomato</a>
+        </div>
+        <!--[logo]>
+        <a class="navbar-brand" href="#">
+        </a> <!-->
+        <ul class="nav navbar-nav " role="tablist">
+            <li><a href="/Home/Index">首页</a></li>
+            <li><a href="/PartyActivities/PartyIndex">社团互动</a></li>
+            <li><a href="/MarketDownstairs/MarketIndex">楼下小铺</a></li>
+            <li><a href="#">新生指南</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            @if (User.IsInRole("社团"))
+            {
+                // [@Html.ActionLink("个人中心", "PersonalInfo", "Account")]
+                //[ @Html.ActionLink("注销", "LogOff", "Account") ]
+                <li style="color:white">
+                    <a>欢迎<small>@User.Identity.Name !</small></a>
+                </li>
+                <li class="active"><a href="/PartyActivities/SetPartyInfo?partyName=@User.Identity.Name">社团中心</a></li>
+                <li><a href="/Account/LogOff">注销</a></li>
+
+
+
+            }
+            @if (!User.IsInRole("社团"))
+            {
+
+                <li><a href="/Account/PartyLoginIndex">登陆/注册</a></li>
+
+            }
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container" style="background-color:#fff;height:900px;">
+
+
+    <div style="display:block;position:relative;top:54px;">
+
+        @Html.Action("MyPartyInformation", new { partyName = @ViewBag.partyName })
+        @*导航菜单*@
+        <ul class="nav nav-tabs" contenteditable="true" style="background-color:#eee7e7">
+            <li id="mygoodli" class="active"><a onclick="window.location = '/PartyActivities/SetPartyInfo?partyName=@ViewBag.partyName'" role="button">基本信息设置</a></li>
+
+            <li id="myactivities"><a onclick="window.location = '/PartyActivities/MyPartyActivities?partyName=@ViewBag.partyName'" role="button">社团活动</a></li>
+
+            <li id="mynoticeli"><a onclick="window.location = '/PartyActivities/Notice?partyName=@ViewBag.partyName'" role="button">通知</a></li>
+
+            <li id="myupdatepassword"><a onclick="window.location = '/PartyActivities/UpdatePassword?partyName=@ViewBag.partyName'" role="button">修改密码</a></li>
+        </ul>
+
+        <div aria-multiline="True" style=" background-color:#fff ;overflow:scroll;height:auto;">
+            @using (Html.BeginForm("SetPartyInfo", "PartyActivities", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+            {
+
+            <div id="party-infoform" style="display:block; position:relative;top:10px;">
+            <fieldset>
+
+                <div class="editor-label">
+                    <label>社团名称：</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.TextBoxFor(m => m.partyName, new { @class = "form-control", placeholder = "社团名称", style = "disabled" })
+                </div>
+
+
+
+                <div class="editor-label">
+                    <label>社团宗旨：</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.TextBoxFor(m => m.partyPurpose, new { @class = "form-control", placeholder = "社团宗旨" })
+                </div>
+
+
+
+                <div class="editor-label">
+                    <label>社团性质：</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.TextBoxFor(m => m.partyProperty, new { @class = "form-control", placeholder = "社团性质" })
+                </div>
+                <div class="editor-label">
+                    <label>社团使命：</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.TextBoxFor(m => m.partyTask, new { @class = "form-control", placeholder = "社团使命" })
+                </div>
+                <div class="editor-label">
+                    <label>社团活动：</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.TextBoxFor(m => m.partyActivities, new { @class = "form-control", placeholder = "社团活动" })
+                </div>
+
+                <div class="editor-label">
+                    <label>社团成员:</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.TextBoxFor(m => m.partyMembers, new { @class = "form-control", placeholder = "社团成员" })
+                </div>
+                <div class="editor-label">
+                    <label>建立时间:</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.TextBoxFor(m => m.partyFoundingTime, new { @class = "form-control", placeholder = "建立时间" })
+
+                </div>
+                <div class="editor-label">
+                    <label>社团简介:</label>
+                    &nbsp;&nbsp;&nbsp;
+                    @Html.TextAreaFor(m => m.partyDescribe, new { @class = "form-control", placeholder = "社团简介" })
+
+                </div>
+                <div>
+                    <label>
+                        上传logo：
+                    </label>
+                    <div class="file-box">
+                        <input type='text' name='textfield' id='textfield' class='txt' />
+                        <input type='button' class='btn' value='浏览...' />
+                        <input type="file" name="image" class="file" id="fileField" size="28" onchange="document.getElementById('textfield').value=this.value" />
+                        @*<input type="submit" name="submit" class="btn" value="上传" />*@
+
+                    </div>
+
+                </div>
+
+                <br />
+                <div class="editor-label">
+                    <button type="submit" class="btn btn-primary">更改信息</button>
+                </div>
+            </fieldset>
+        </div>
+
+            }
+
+
+        </div>
+    </div>
+</div>
+
+<style type="text/css">
+    .file-box {
+        position: relative;
+        width: 340px;
+    }
+
+    .txt {
+        height: 30px;
+        border: 1px solid #cdcdcd;
+        width: 180px;
+    }
+
+
+
+    .file {
+        position: absolute;
+        top: 0;
+        right: 80px;
+        height: 24px;
+        filter: alpha(opacity:0);
+        opacity: 0;
+        width: 260px;
+    }
+</style>

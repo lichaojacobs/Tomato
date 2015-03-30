@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "玩会吧";
+}
+
+@*扁平化样式*@
+<link href="~/Content/css/flat-ui.css" rel="stylesheet" />
+
+
+<!--导航栏-->
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Tomato</a>
+        </div>
+        <!--[logo]>
+        <a class="navbar-brand" href="#">
+        </a> <!-->
+        <ul class="nav navbar-nav " role="tablist">
+            <li class="active"><a href="/Home/Index">首页</a></li>
+            <li><a href="/PartyActivities/PartyIndex">社团互动</a></li>
+            <li><a href="/MarketDownstairs/MarketIndex">楼下小铺</a></li>
+            <li><a href="#">新生指南</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            @if (User.IsInRole("普通用户"))
+            {
+                // [@Html.ActionLink("个人中心", "PersonalInfo", "Account")]
+                //[ @Html.ActionLink("注销", "LogOff", "Account") ]
+                <li style="color:white">
+                    <a>欢迎<small>@User.Identity.Name !</small></a>
+                </li>
+                <li><a href="/Account/PersonalInfo">个人中心</a></li>
+                <li><a href="/Account/LogOff">注销</a></li>
+                
+
+
+            }
+            @if (!User.IsInRole("普通用户"))
+            {
+
+                <li><a href="/Account/Reviselogin">登陆/注册</a></li>
+
+            }
+        </ul>
+
+        
+    </div>
+</nav>
+
+
+<div class="banner" style="display:block;position:relative;top:53px;">
+    <ul>
+        <li style="background-image:url('http://www.bootcss.com/p/unslider/img/wood.jpg');background-size: 100% 100%;">This is a slide.</li>
+        <li style="background-image:url('http://www.bootcss.com/p/unslider/img/sunset.jpg');background-size: 100% 100%;">This is another slide.</li>
+        <li style="background-image:url('http://www.bootcss.com/p/unslider/img/shop.jpg');background-size: 100% 100%;">This is a final slide.</li>
+    </ul>
+
+    
+</div>
+@*这里的top:50px;是从上面的banner的底部算起的*@
+<div class="features" style="display:block;position:relative;top:50px;">
+    <ul class=" wrap">
+        <li class="browser">
+            <b><a href="/GPA/GPA"><span class="glyphicon glyphicon-stats"></span> GPA</a></b>
+            <p>查询GPA与加权平均分数</p>
+        </li>
+        <li class="keyboard">
+            <b><a href="/ClassRoomSearch/Index"><span class="glyphicon glyphicon-ok-circle"></span> 自习室查询</a></b>
+            <p>查询空闲的自习室</p>
+        </li>
+        <li class="height">
+            <b><a href="#"><span class="glyphicon glyphicon-sound-5-1"></span> 近期赛事</a></b>
+            <p>校园近期的各项赛事信息</p>
+        </li>
+        <li class="responsive">
+            <b><a href="#"><span class="glyphicon glyphicon-leaf"></span> 关于我们</a></b>
+            <p>更多关注方式</p>
+        </li>
+    </ul>
+</div>
+
+
+
+
+

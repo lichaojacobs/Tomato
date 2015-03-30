@@ -1,0 +1,2288 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GPA查询</title>
+
+    <!-- Bootstrap -->
+   
+    <link href="~/Content/css/chart.css" rel="stylesheet" />
+
+    <script src="http://cdn.bootcss.com/modernizr/2.8.2/modernizr.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <!-- chart -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+
+
+
+    <![endif]-->
+
+    <style>
+        body, p, h1, h2, h3, .btn {
+            font-family: "Microsoft Yahei", sans-serif,arial;
+        }
+    </style>
+</head>
+<body>
+    <!--导航栏-->
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Tomato</a>
+            </div>
+            <!--[logo]>
+            <a class="navbar-brand" href="#">
+            </a> <!-->
+            <ul class="nav navbar-nav " role="tablist">
+                <li class="active"><a href="/Home/Index">首页</a></li>
+                <li><a href="/PartyActivities/PartyIndex">社团互动</a></li>
+                <li><a href="/MarketDownstairs/MarketIndex">楼下小铺</a></li>
+                <li><a href="#">新生指南</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                @if (User.IsInRole("普通用户"))
+                {
+                    // [@Html.ActionLink("个人中心", "PersonalInfo", "Account")]
+                    //[ @Html.ActionLink("注销", "LogOff", "Account") ]
+                    <li style="color:white">
+                        <a>欢迎<small>@User.Identity.Name !</small></a>
+                    </li>
+                    <li><a href="/Account/PersonalInfo">个人中心</a></li>
+                    <li><a href="/Account/LogOff">注销</a></li>
+
+
+
+                }
+                @if (!User.IsInRole("普通用户"))
+                {
+
+                    <li><a href="/Account/Reviselogin">登陆/注册</a></li>
+
+                }
+            </ul>
+
+
+        </div>
+    </nav>
+
+
+    <div style="display:block;position:relative;top:60px;">
+
+
+        @{if (ViewBag.key == 8)
+        {
+            <div class="list-group">
+                <nav href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">第一学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview1  加权平均成绩： @ViewBag.averageview1</p>
+                </nav>
+            </div>
+
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading">第二学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview2  加权平均成绩： @ViewBag.averageview2</p>
+                </nav>
+            </div>
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">第三学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview3  加权平均成绩： @ViewBag.averageview3</p>
+                </nav>
+            </div>
+
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading">第四学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview4  加权平均成绩： @ViewBag.averageview4</p>
+                </nav>
+            </div>
+
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">第五学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview5  加权平均成绩： @ViewBag.averageview5</p>
+                </nav>
+            </div>
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading">第六学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview6  加权平均成绩： @ViewBag.averageview6</p>
+                </nav>
+            </div>
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">第七学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview7  加权平均成绩： @ViewBag.averageview7</p>
+                </nav>
+            </div>
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading">第八学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview8  加权平均成绩： @ViewBag.averageview8</p>
+                </nav>
+            </div>
+
+
+        }}
+
+
+        @{if (ViewBag.key == 7)
+        {
+            <div class="list-group">
+                <nav href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">第一学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview1  加权平均成绩： @ViewBag.averageview1</p>
+                </nav>
+            </div>
+
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading">第二学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview2  加权平均成绩： @ViewBag.averageview2</p>
+                </nav>
+            </div>
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">第三学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview3  加权平均成绩： @ViewBag.averageview3</p>
+                </nav>
+            </div>
+
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading">第四学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview4  加权平均成绩： @ViewBag.averageview4</p>
+                </nav>
+            </div>
+
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">第五学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview5  加权平均成绩： @ViewBag.averageview5</p>
+                </nav>
+            </div>
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading">第六学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview6  加权平均成绩： @ViewBag.averageview6</p>
+                </nav>
+            </div>
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">第七学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview7  加权平均成绩： @ViewBag.averageview7</p>
+                </nav>
+            </div>
+
+
+        }}
+
+
+        @{if (ViewBag.key == 6)
+        {
+            <div class="list-group">
+                <nav href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">第一学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview1  加权平均成绩： @ViewBag.averageview1</p>
+                </nav>
+            </div>
+
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading">第二学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview2  加权平均成绩： @ViewBag.averageview2</p>
+                </nav>
+            </div>
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">第三学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview3  加权平均成绩： @ViewBag.averageview3</p>
+                </nav>
+            </div>
+
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading">第四学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview4  加权平均成绩： @ViewBag.averageview4</p>
+                </nav>
+            </div>
+
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">第五学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview5  加权平均成绩： @ViewBag.averageview5</p>
+                </nav>
+            </div>
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading">第六学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview6  加权平均成绩： @ViewBag.averageview6</p>
+                </nav>
+            </div>
+
+
+
+        }}
+
+        @{if (ViewBag.key == 5)
+        {
+            <div class="list-group">
+                <nav href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">第一学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview1  加权平均成绩： @ViewBag.averageview1</p>
+                </nav>
+            </div>
+
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading">第二学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview2  加权平均成绩： @ViewBag.averageview2</p>
+                </nav>
+            </div>
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">第三学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview3  加权平均成绩： @ViewBag.averageview3</p>
+                </nav>
+            </div>
+
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading">第四学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview4  加权平均成绩： @ViewBag.averageview4</p>
+                </nav>
+            </div>
+
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">第五学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview5  加权平均成绩： @ViewBag.averageview5</p>
+                </nav>
+            </div>
+
+
+
+
+        }}
+
+        @{if (ViewBag.key == 4)
+        {
+            <div class="list-group">
+                <nav href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">第一学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview1  加权平均成绩： @ViewBag.averageview1</p>
+                </nav>
+            </div>
+
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading">第二学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview2  加权平均成绩： @ViewBag.averageview2</p>
+                </nav>
+            </div>
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">第三学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview3  加权平均成绩： @ViewBag.averageview3</p>
+                </nav>
+            </div>
+
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading">第四学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview4  加权平均成绩： @ViewBag.averageview4</p>
+                </nav>
+            </div>
+
+
+
+        }}
+
+        @{if (ViewBag.key == 3)
+        {
+            <div class="list-group">
+                <nav href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">第一学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview1  加权平均成绩： @ViewBag.averageview1</p>
+                </nav>
+            </div>
+
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading">第二学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview2  加权平均成绩： @ViewBag.averageview2</p>
+                </nav>
+            </div>
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">第三学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview3  加权平均成绩： @ViewBag.averageview3</p>
+                </nav>
+            </div>
+
+
+        }}
+
+
+        @{if (ViewBag.key == 2)
+        {
+            <div class="list-group">
+                <nav href="#" class="list-group-item active">
+                    <h4 class="list-group-item-heading">第一学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview1  加权平均成绩： @ViewBag.averageview1  </p>
+                </nav>
+            </div>
+
+
+            <div class="list-group">
+                <nav href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading">第二学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview2  加权平均成绩： @ViewBag.averageview2</p>
+                </nav>
+            </div>
+
+
+        }}
+
+
+        @{if (ViewBag.key == 1)
+        {
+            <div class="list-group">
+                <nav href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading">第一学期</h4>
+                    <p class="list-group-item-text">GPA: @ViewBag.gpaview1  加权平均成绩： @ViewBag.averageview1</p>
+                </nav>
+            </div>
+
+
+
+
+        }}
+
+
+        <div class="list-group">
+            <nav href="#" class="list-group-item active">
+                <h4 class="list-group-item-heading">总成绩</h4>
+                <p class="list-group-item-text">GPA: @ViewBag.sumofgpa 加权平均成绩：@ViewBag.sumofaverage  已修学分总数：@ViewBag.sumofweight</p>
+            </nav>
+        </div>
+
+        <section>
+
+            <div class="col-sm-6">
+
+                <h1>加权成绩走势图</h1>
+
+                <br>
+                <br>
+                <br>
+                <!-- Button trigger modal -->
+                <button class="btn btn-primary btn-lg col-md-offset-2" data-toggle="modal" data-target="#myModal">
+                    查询说明
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                            </div>
+                            <div class="modal-body">
+                                <ul>
+                                    <li>社会实践分数未计入成绩</li>
+                                    <li>双学位分数未计入成绩</li>
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-sm-6">
+
+                <canvas id="lineChartCanvas" width="449" height="300"></canvas>
+            </div>
+
+        </section>
+
+
+
+
+
+
+
+        <section>
+
+            <div class="col-sm-6">
+
+                <h1>成绩分布图</h1>
+
+            </div>
+
+
+            <div class="col-sm-6">
+
+                <canvas id="barChartCanvas" width="449" height="300"></canvas>
+            </div>
+
+        </section>
+
+
+        @*图表所需的脚本*@
+        @*<script src="~/html/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>*@
+        <script src="~/Content/js/Chart.js"></script>
+        @*6*@
+        @{if (ViewBag.key == 8)
+        {
+            <script>
+
+
+                $(window).load(function () {
+
+                    var lineChartData = {
+                        labels: ["第一学期", "第二学期", "第三学期", "第四学期", "第五学期", "第六学期", "第七学期", "第八学期"],
+                        datasets: [
+
+                            {
+                                fillColor: "rgba(151,187,205,0.5)",
+                                strokeColor: "rgba(151,187,205,1)",
+                                pointColor: "rgba(151,187,205,1)",
+                                pointStrokeColor: "#fff",
+                                data: [ @ViewBag.averageview1,@ViewBag.averageview2,@ViewBag.averageview3,@ViewBag.averageview4,@ViewBag.averageview5,@ViewBag.averageview6,@ViewBag.averageview7,@ViewBag.averageview8]
+                            }
+                        ]
+                    };
+
+
+                    var barChartData = {
+                        labels: ["小于60", "60-69", "70-79", "80-89", "大于等于90"],
+                        datasets: [
+                            {
+                                fillColor: "rgba(151,187,205,0.5)",
+                                strokeColor: "rgba(151,187,205,1)",
+                                data: [@ViewBag.chartdata[0], @ViewBag.chartdata[1], @ViewBag.chartdata[2], @ViewBag.chartdata[3], @ViewBag.chartdata[4]]
+                            }
+                        ]
+
+                    };
+
+
+                    var globalGraphSettings = { animation: Modernizr.canvas };
+
+
+                    showLineChart();
+                    function showLineChart() {
+                        var ctx = document.getElementById("lineChartCanvas").getContext("2d");
+                        new Chart(ctx).Line(lineChartData, globalGraphSettings);
+                    };
+
+
+                    showBarChart();
+                    function showBarChart() {
+                        var ctx = document.getElementById("barChartCanvas").getContext("2d");
+                        new Chart(ctx).Bar(barChartData, globalGraphSettings);
+                    };
+
+                    var graphInitDelay = 300;
+
+                    //Set up each of the inview events here.
+                    $("#lineChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showLineChart, graphInitDelay);
+                    });
+                    $("#barChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showBarChart, graphInitDelay);
+                    });
+
+                    $("#radarChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showRadarChart, graphInitDelay);
+                    });
+                    $("#pieChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showPieChart, graphInitDelay);
+                    });
+                    $("#polarAreaChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showPolarAreaChart, graphInitDelay);
+                    });
+                    $("#doughnutChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showDoughnutChart, graphInitDelay);
+                    });
+
+                });
+
+                /**
+                 * author Christopher Blum
+                 *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
+                 *    - forked from http://github.com/zuk/jquery.inview/
+                 */
+                (function ($) {
+                    var inviewObjects = {}, viewportSize, viewportOffset,
+                        d = document, w = window, documentElement = d.documentElement, expando = $.expando;
+
+                    $.event.special.inview = {
+                        add: function (data) {
+                            inviewObjects[data.guid + "-" + this[expando]] = { data: data, $element: $(this) };
+                        },
+
+                        remove: function (data) {
+                            try { delete inviewObjects[data.guid + "-" + this[expando]]; } catch (e) { }
+                        }
+                    };
+
+                    function getViewportSize() {
+                        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
+
+                        // if this is correct then return it. iPad has compat Mode, so will
+                        // go into check clientHeight/clientWidth (which has the wrong value).
+                        if (!size.height) {
+                            mode = d.compatMode;
+                            if (mode || !$.support.boxModel) { // IE, Gecko
+                                domObject = mode === 'CSS1Compat' ?
+                                    documentElement : // Standards
+                                  d.body; // Quirks
+                                size = {
+                                    height: domObject.clientHeight,
+                                    width: domObject.clientWidth
+                                };
+                            }
+                        }
+
+                        return size;
+                    }
+
+                    function getViewportOffset() {
+                        return {
+                            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
+                            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
+                        };
+                    }
+
+                    function checkInView() {
+                        var $elements = $(), elementsLength, i = 0;
+
+                        $.each(inviewObjects, function (i, inviewObject) {
+                            var selector = inviewObject.data.selector,
+                                $element = inviewObject.$element;
+                            $elements = $elements.add(selector ? $element.find(selector) : $element);
+                        });
+
+                        elementsLength = $elements.length;
+                        if (elementsLength) {
+                            viewportSize = viewportSize || getViewportSize();
+                            viewportOffset = viewportOffset || getViewportOffset();
+
+                            for (; i < elementsLength; i++) {
+                                // Ignore elements that are not in the DOM tree
+                                if (!$.contains(documentElement, $elements[i])) {
+                                    continue;
+                                }
+
+                                var $element = $($elements[i]),
+                                    elementSize = { height: $element.height(), width: $element.width() },
+                                    elementOffset = $element.offset(),
+                                    inView = $element.data('inview'),
+                                    visiblePartX,
+                                    visiblePartY,
+                                    visiblePartsMerged;
+
+                                // Don't ask me why because I haven't figured out yet:
+                                // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
+                                // Even though it sounds weird:
+                                // It seems that the execution of this function is interferred by the onresize/onscroll event
+                                // where viewportOffset and viewportSize are unset
+                                if (!viewportOffset || !viewportSize) {
+                                    return;
+                                }
+
+                                if (elementOffset.top + elementSize.height > viewportOffset.top &&
+                                    elementOffset.top < viewportOffset.top + viewportSize.height &&
+                                    elementOffset.left + elementSize.width > viewportOffset.left &&
+                                    elementOffset.left < viewportOffset.left + viewportSize.width) {
+                                    visiblePartX = (viewportOffset.left > elementOffset.left ?
+                                      'right' : (viewportOffset.left + viewportSize.width) < (elementOffset.left + elementSize.width) ?
+                                      'left' : 'both');
+                                    visiblePartY = (viewportOffset.top > elementOffset.top ?
+                                      'bottom' : (viewportOffset.top + viewportSize.height) < (elementOffset.top + elementSize.height) ?
+                                      'top' : 'both');
+                                    visiblePartsMerged = visiblePartX + "-" + visiblePartY;
+                                    if (!inView || inView !== visiblePartsMerged) {
+                                        $element.data('inview', visiblePartsMerged).trigger('inview', [true, visiblePartX, visiblePartY]);
+                                    }
+                                } else if (inView) {
+                                    $element.data('inview', false).trigger('inview', [false]);
+                                }
+                            }
+                        }
+                    }
+
+                    $(w).bind("scroll resize", function () {
+                        viewportSize = viewportOffset = null;
+                    });
+
+                    // IE < 9 scrolls to focused elements without firing the "scroll" event
+                    if (!documentElement.addEventListener && documentElement.attachEvent) {
+                        documentElement.attachEvent("onfocusin", function () {
+                            viewportOffset = null;
+                        });
+                    }
+
+                    // Use setInterval in order to also make sure this captures elements within
+                    // "overflow:scroll" elements or elements that appeared in the dom tree due to
+                    // dom manipulation and reflow
+                    // old: $(window).scroll(checkInView);
+                    //
+                    // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
+                    // intervals while the user scrolls. Therefore the inview event might fire a bit late there
+                    setInterval(checkInView, 250);
+                })(jQuery);
+
+            </script>
+        }
+        }
+
+
+        @*6*@
+        @{if (ViewBag.key == 7)
+        {
+            <script>
+
+
+                $(window).load(function () {
+
+                    var lineChartData = {
+                        labels: ["第一学期", "第二学期", "第三学期", "第四学期", "第五学期", "第六学期", "第七学期"],
+                        datasets: [
+
+                            {
+                                fillColor: "rgba(151,187,205,0.5)",
+                                strokeColor: "rgba(151,187,205,1)",
+                                pointColor: "rgba(151,187,205,1)",
+                                pointStrokeColor: "#fff",
+                                data: [ @ViewBag.averageview1,@ViewBag.averageview2,@ViewBag.averageview3,@ViewBag.averageview4,@ViewBag.averageview5,@ViewBag.averageview6,@ViewBag.averageview7]
+                            }
+                        ]
+                    };
+
+
+
+
+
+
+                    var barChartData = {
+                        labels: ["小于60", "60-69", "70-79", "80-89", "大于等于90"],
+                        datasets: [
+                            {
+                                fillColor: "rgba(151,187,205,0.5)",
+                                strokeColor: "rgba(151,187,205,1)",
+                                data: [@ViewBag.chartdata[0], @ViewBag.chartdata[1], @ViewBag.chartdata[2], @ViewBag.chartdata[3], @ViewBag.chartdata[4]]
+                            }
+                        ]
+
+                    };
+
+
+                    var globalGraphSettings = { animation: Modernizr.canvas };
+
+
+                    showLineChart();
+                    function showLineChart() {
+                        var ctx = document.getElementById("lineChartCanvas").getContext("2d");
+                        new Chart(ctx).Line(lineChartData, globalGraphSettings);
+                    };
+
+
+                    showBarChart();
+                    function showBarChart() {
+                        var ctx = document.getElementById("barChartCanvas").getContext("2d");
+                        new Chart(ctx).Bar(barChartData, globalGraphSettings);
+                    };
+
+                    var graphInitDelay = 300;
+
+                    //Set up each of the inview events here.
+                    $("#lineChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showLineChart, graphInitDelay);
+                    });
+                    $("#barChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showBarChart, graphInitDelay);
+                    });
+
+                    $("#radarChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showRadarChart, graphInitDelay);
+                    });
+                    $("#pieChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showPieChart, graphInitDelay);
+                    });
+                    $("#polarAreaChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showPolarAreaChart, graphInitDelay);
+                    });
+                    $("#doughnutChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showDoughnutChart, graphInitDelay);
+                    });
+
+                });
+
+                /**
+                 * author Christopher Blum
+                 *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
+                 *    - forked from http://github.com/zuk/jquery.inview/
+                 */
+                (function ($) {
+                    var inviewObjects = {}, viewportSize, viewportOffset,
+                        d = document, w = window, documentElement = d.documentElement, expando = $.expando;
+
+                    $.event.special.inview = {
+                        add: function (data) {
+                            inviewObjects[data.guid + "-" + this[expando]] = { data: data, $element: $(this) };
+                        },
+
+                        remove: function (data) {
+                            try { delete inviewObjects[data.guid + "-" + this[expando]]; } catch (e) { }
+                        }
+                    };
+
+                    function getViewportSize() {
+                        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
+
+                        // if this is correct then return it. iPad has compat Mode, so will
+                        // go into check clientHeight/clientWidth (which has the wrong value).
+                        if (!size.height) {
+                            mode = d.compatMode;
+                            if (mode || !$.support.boxModel) { // IE, Gecko
+                                domObject = mode === 'CSS1Compat' ?
+                                    documentElement : // Standards
+                                  d.body; // Quirks
+                                size = {
+                                    height: domObject.clientHeight,
+                                    width: domObject.clientWidth
+                                };
+                            }
+                        }
+
+                        return size;
+                    }
+
+                    function getViewportOffset() {
+                        return {
+                            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
+                            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
+                        };
+                    }
+
+                    function checkInView() {
+                        var $elements = $(), elementsLength, i = 0;
+
+                        $.each(inviewObjects, function (i, inviewObject) {
+                            var selector = inviewObject.data.selector,
+                                $element = inviewObject.$element;
+                            $elements = $elements.add(selector ? $element.find(selector) : $element);
+                        });
+
+                        elementsLength = $elements.length;
+                        if (elementsLength) {
+                            viewportSize = viewportSize || getViewportSize();
+                            viewportOffset = viewportOffset || getViewportOffset();
+
+                            for (; i < elementsLength; i++) {
+                                // Ignore elements that are not in the DOM tree
+                                if (!$.contains(documentElement, $elements[i])) {
+                                    continue;
+                                }
+
+                                var $element = $($elements[i]),
+                                    elementSize = { height: $element.height(), width: $element.width() },
+                                    elementOffset = $element.offset(),
+                                    inView = $element.data('inview'),
+                                    visiblePartX,
+                                    visiblePartY,
+                                    visiblePartsMerged;
+
+                                // Don't ask me why because I haven't figured out yet:
+                                // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
+                                // Even though it sounds weird:
+                                // It seems that the execution of this function is interferred by the onresize/onscroll event
+                                // where viewportOffset and viewportSize are unset
+                                if (!viewportOffset || !viewportSize) {
+                                    return;
+                                }
+
+                                if (elementOffset.top + elementSize.height > viewportOffset.top &&
+                                    elementOffset.top < viewportOffset.top + viewportSize.height &&
+                                    elementOffset.left + elementSize.width > viewportOffset.left &&
+                                    elementOffset.left < viewportOffset.left + viewportSize.width) {
+                                    visiblePartX = (viewportOffset.left > elementOffset.left ?
+                                      'right' : (viewportOffset.left + viewportSize.width) < (elementOffset.left + elementSize.width) ?
+                                      'left' : 'both');
+                                    visiblePartY = (viewportOffset.top > elementOffset.top ?
+                                      'bottom' : (viewportOffset.top + viewportSize.height) < (elementOffset.top + elementSize.height) ?
+                                      'top' : 'both');
+                                    visiblePartsMerged = visiblePartX + "-" + visiblePartY;
+                                    if (!inView || inView !== visiblePartsMerged) {
+                                        $element.data('inview', visiblePartsMerged).trigger('inview', [true, visiblePartX, visiblePartY]);
+                                    }
+                                } else if (inView) {
+                                    $element.data('inview', false).trigger('inview', [false]);
+                                }
+                            }
+                        }
+                    }
+
+                    $(w).bind("scroll resize", function () {
+                        viewportSize = viewportOffset = null;
+                    });
+
+                    // IE < 9 scrolls to focused elements without firing the "scroll" event
+                    if (!documentElement.addEventListener && documentElement.attachEvent) {
+                        documentElement.attachEvent("onfocusin", function () {
+                            viewportOffset = null;
+                        });
+                    }
+
+                    // Use setInterval in order to also make sure this captures elements within
+                    // "overflow:scroll" elements or elements that appeared in the dom tree due to
+                    // dom manipulation and reflow
+                    // old: $(window).scroll(checkInView);
+                    //
+                    // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
+                    // intervals while the user scrolls. Therefore the inview event might fire a bit late there
+                    setInterval(checkInView, 250);
+                })(jQuery);
+
+            </script>
+        }
+        }
+
+
+
+
+        @*6*@
+        @{if (ViewBag.key == 6)
+        {
+            <script>
+
+
+                $(window).load(function () {
+
+                    var lineChartData = {
+                        labels: ["第一学期", "第二学期", "第三学期", "第四学期", "第五学期", "第六学期"],
+                        datasets: [
+
+                            {
+                                fillColor: "rgba(151,187,205,0.5)",
+                                strokeColor: "rgba(151,187,205,1)",
+                                pointColor: "rgba(151,187,205,1)",
+                                pointStrokeColor: "#fff",
+                                data: [ @ViewBag.averageview1,@ViewBag.averageview2,@ViewBag.averageview3,@ViewBag.averageview4,@ViewBag.averageview5,@ViewBag.averageview6]
+                            }
+                        ]
+                    };
+
+
+
+
+
+
+                    var barChartData = {
+                        labels: ["小于60", "60-69", "70-79", "80-89", "大于等于90"],
+                        datasets: [
+                            {
+                                fillColor: "rgba(151,187,205,0.5)",
+                                strokeColor: "rgba(151,187,205,1)",
+                                data: [@ViewBag.chartdata[0], @ViewBag.chartdata[1], @ViewBag.chartdata[2], @ViewBag.chartdata[3], @ViewBag.chartdata[4]]
+                            }
+                        ]
+
+                    };
+
+
+                    var globalGraphSettings = { animation: Modernizr.canvas };
+
+
+                    showLineChart();
+                    function showLineChart() {
+                        var ctx = document.getElementById("lineChartCanvas").getContext("2d");
+                        new Chart(ctx).Line(lineChartData, globalGraphSettings);
+                    };
+
+
+                    showBarChart();
+                    function showBarChart() {
+                        var ctx = document.getElementById("barChartCanvas").getContext("2d");
+                        new Chart(ctx).Bar(barChartData, globalGraphSettings);
+                    };
+
+                    var graphInitDelay = 300;
+
+                    //Set up each of the inview events here.
+                    $("#lineChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showLineChart, graphInitDelay);
+                    });
+                    $("#barChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showBarChart, graphInitDelay);
+                    });
+
+                    $("#radarChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showRadarChart, graphInitDelay);
+                    });
+                    $("#pieChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showPieChart, graphInitDelay);
+                    });
+                    $("#polarAreaChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showPolarAreaChart, graphInitDelay);
+                    });
+                    $("#doughnutChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showDoughnutChart, graphInitDelay);
+                    });
+
+                });
+
+                /**
+                 * author Christopher Blum
+                 *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
+                 *    - forked from http://github.com/zuk/jquery.inview/
+                 */
+                (function ($) {
+                    var inviewObjects = {}, viewportSize, viewportOffset,
+                        d = document, w = window, documentElement = d.documentElement, expando = $.expando;
+
+                    $.event.special.inview = {
+                        add: function (data) {
+                            inviewObjects[data.guid + "-" + this[expando]] = { data: data, $element: $(this) };
+                        },
+
+                        remove: function (data) {
+                            try { delete inviewObjects[data.guid + "-" + this[expando]]; } catch (e) { }
+                        }
+                    };
+
+                    function getViewportSize() {
+                        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
+
+                        // if this is correct then return it. iPad has compat Mode, so will
+                        // go into check clientHeight/clientWidth (which has the wrong value).
+                        if (!size.height) {
+                            mode = d.compatMode;
+                            if (mode || !$.support.boxModel) { // IE, Gecko
+                                domObject = mode === 'CSS1Compat' ?
+                                    documentElement : // Standards
+                                  d.body; // Quirks
+                                size = {
+                                    height: domObject.clientHeight,
+                                    width: domObject.clientWidth
+                                };
+                            }
+                        }
+
+                        return size;
+                    }
+
+                    function getViewportOffset() {
+                        return {
+                            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
+                            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
+                        };
+                    }
+
+                    function checkInView() {
+                        var $elements = $(), elementsLength, i = 0;
+
+                        $.each(inviewObjects, function (i, inviewObject) {
+                            var selector = inviewObject.data.selector,
+                                $element = inviewObject.$element;
+                            $elements = $elements.add(selector ? $element.find(selector) : $element);
+                        });
+
+                        elementsLength = $elements.length;
+                        if (elementsLength) {
+                            viewportSize = viewportSize || getViewportSize();
+                            viewportOffset = viewportOffset || getViewportOffset();
+
+                            for (; i < elementsLength; i++) {
+                                // Ignore elements that are not in the DOM tree
+                                if (!$.contains(documentElement, $elements[i])) {
+                                    continue;
+                                }
+
+                                var $element = $($elements[i]),
+                                    elementSize = { height: $element.height(), width: $element.width() },
+                                    elementOffset = $element.offset(),
+                                    inView = $element.data('inview'),
+                                    visiblePartX,
+                                    visiblePartY,
+                                    visiblePartsMerged;
+
+                                // Don't ask me why because I haven't figured out yet:
+                                // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
+                                // Even though it sounds weird:
+                                // It seems that the execution of this function is interferred by the onresize/onscroll event
+                                // where viewportOffset and viewportSize are unset
+                                if (!viewportOffset || !viewportSize) {
+                                    return;
+                                }
+
+                                if (elementOffset.top + elementSize.height > viewportOffset.top &&
+                                    elementOffset.top < viewportOffset.top + viewportSize.height &&
+                                    elementOffset.left + elementSize.width > viewportOffset.left &&
+                                    elementOffset.left < viewportOffset.left + viewportSize.width) {
+                                    visiblePartX = (viewportOffset.left > elementOffset.left ?
+                                      'right' : (viewportOffset.left + viewportSize.width) < (elementOffset.left + elementSize.width) ?
+                                      'left' : 'both');
+                                    visiblePartY = (viewportOffset.top > elementOffset.top ?
+                                      'bottom' : (viewportOffset.top + viewportSize.height) < (elementOffset.top + elementSize.height) ?
+                                      'top' : 'both');
+                                    visiblePartsMerged = visiblePartX + "-" + visiblePartY;
+                                    if (!inView || inView !== visiblePartsMerged) {
+                                        $element.data('inview', visiblePartsMerged).trigger('inview', [true, visiblePartX, visiblePartY]);
+                                    }
+                                } else if (inView) {
+                                    $element.data('inview', false).trigger('inview', [false]);
+                                }
+                            }
+                        }
+                    }
+
+                    $(w).bind("scroll resize", function () {
+                        viewportSize = viewportOffset = null;
+                    });
+
+                    // IE < 9 scrolls to focused elements without firing the "scroll" event
+                    if (!documentElement.addEventListener && documentElement.attachEvent) {
+                        documentElement.attachEvent("onfocusin", function () {
+                            viewportOffset = null;
+                        });
+                    }
+
+                    // Use setInterval in order to also make sure this captures elements within
+                    // "overflow:scroll" elements or elements that appeared in the dom tree due to
+                    // dom manipulation and reflow
+                    // old: $(window).scroll(checkInView);
+                    //
+                    // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
+                    // intervals while the user scrolls. Therefore the inview event might fire a bit late there
+                    setInterval(checkInView, 250);
+                })(jQuery);
+
+            </script>
+        }
+        }
+
+        @{if (ViewBag.key == 5)
+        {
+            <script>
+
+
+                $(window).load(function () {
+
+                    var lineChartData = {
+                        labels: ["第一学期", "第二学期", "第三学期", "第四学期", "第五学期"],
+                        datasets: [
+
+                            {
+                                fillColor: "rgba(151,187,205,0.5)",
+                                strokeColor: "rgba(151,187,205,1)",
+                                pointColor: "rgba(151,187,205,1)",
+                                pointStrokeColor: "#fff",
+                                data: [ @ViewBag.averageview1,@ViewBag.averageview2,@ViewBag.averageview3,@ViewBag.averageview4,@ViewBag.averageview5]
+                            }
+                        ]
+                    };
+
+
+
+
+
+
+                    var barChartData = {
+                        labels: ["小于60", "60-69", "70-79", "80-89", "大于等于90"],
+                        datasets: [
+                            {
+                                fillColor: "rgba(151,187,205,0.5)",
+                                strokeColor: "rgba(151,187,205,1)",
+                                data: [@ViewBag.chartdata[0], @ViewBag.chartdata[1], @ViewBag.chartdata[2], @ViewBag.chartdata[3], @ViewBag.chartdata[4]]
+                            }
+                        ]
+
+                    };
+
+
+                    var globalGraphSettings = { animation: Modernizr.canvas };
+
+
+                    showLineChart();
+                    function showLineChart() {
+                        var ctx = document.getElementById("lineChartCanvas").getContext("2d");
+                        new Chart(ctx).Line(lineChartData, globalGraphSettings);
+                    };
+
+
+                    showBarChart();
+                    function showBarChart() {
+                        var ctx = document.getElementById("barChartCanvas").getContext("2d");
+                        new Chart(ctx).Bar(barChartData, globalGraphSettings);
+                    };
+
+                    var graphInitDelay = 300;
+
+                    //Set up each of the inview events here.
+                    $("#lineChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showLineChart, graphInitDelay);
+                    });
+                    $("#barChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showBarChart, graphInitDelay);
+                    });
+
+                    $("#radarChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showRadarChart, graphInitDelay);
+                    });
+                    $("#pieChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showPieChart, graphInitDelay);
+                    });
+                    $("#polarAreaChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showPolarAreaChart, graphInitDelay);
+                    });
+                    $("#doughnutChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showDoughnutChart, graphInitDelay);
+                    });
+
+                });
+
+                /**
+                 * author Christopher Blum
+                 *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
+                 *    - forked from http://github.com/zuk/jquery.inview/
+                 */
+                (function ($) {
+                    var inviewObjects = {}, viewportSize, viewportOffset,
+                        d = document, w = window, documentElement = d.documentElement, expando = $.expando;
+
+                    $.event.special.inview = {
+                        add: function (data) {
+                            inviewObjects[data.guid + "-" + this[expando]] = { data: data, $element: $(this) };
+                        },
+
+                        remove: function (data) {
+                            try { delete inviewObjects[data.guid + "-" + this[expando]]; } catch (e) { }
+                        }
+                    };
+
+                    function getViewportSize() {
+                        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
+
+                        // if this is correct then return it. iPad has compat Mode, so will
+                        // go into check clientHeight/clientWidth (which has the wrong value).
+                        if (!size.height) {
+                            mode = d.compatMode;
+                            if (mode || !$.support.boxModel) { // IE, Gecko
+                                domObject = mode === 'CSS1Compat' ?
+                                    documentElement : // Standards
+                                  d.body; // Quirks
+                                size = {
+                                    height: domObject.clientHeight,
+                                    width: domObject.clientWidth
+                                };
+                            }
+                        }
+
+                        return size;
+                    }
+
+                    function getViewportOffset() {
+                        return {
+                            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
+                            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
+                        };
+                    }
+
+                    function checkInView() {
+                        var $elements = $(), elementsLength, i = 0;
+
+                        $.each(inviewObjects, function (i, inviewObject) {
+                            var selector = inviewObject.data.selector,
+                                $element = inviewObject.$element;
+                            $elements = $elements.add(selector ? $element.find(selector) : $element);
+                        });
+
+                        elementsLength = $elements.length;
+                        if (elementsLength) {
+                            viewportSize = viewportSize || getViewportSize();
+                            viewportOffset = viewportOffset || getViewportOffset();
+
+                            for (; i < elementsLength; i++) {
+                                // Ignore elements that are not in the DOM tree
+                                if (!$.contains(documentElement, $elements[i])) {
+                                    continue;
+                                }
+
+                                var $element = $($elements[i]),
+                                    elementSize = { height: $element.height(), width: $element.width() },
+                                    elementOffset = $element.offset(),
+                                    inView = $element.data('inview'),
+                                    visiblePartX,
+                                    visiblePartY,
+                                    visiblePartsMerged;
+
+                                // Don't ask me why because I haven't figured out yet:
+                                // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
+                                // Even though it sounds weird:
+                                // It seems that the execution of this function is interferred by the onresize/onscroll event
+                                // where viewportOffset and viewportSize are unset
+                                if (!viewportOffset || !viewportSize) {
+                                    return;
+                                }
+
+                                if (elementOffset.top + elementSize.height > viewportOffset.top &&
+                                    elementOffset.top < viewportOffset.top + viewportSize.height &&
+                                    elementOffset.left + elementSize.width > viewportOffset.left &&
+                                    elementOffset.left < viewportOffset.left + viewportSize.width) {
+                                    visiblePartX = (viewportOffset.left > elementOffset.left ?
+                                      'right' : (viewportOffset.left + viewportSize.width) < (elementOffset.left + elementSize.width) ?
+                                      'left' : 'both');
+                                    visiblePartY = (viewportOffset.top > elementOffset.top ?
+                                      'bottom' : (viewportOffset.top + viewportSize.height) < (elementOffset.top + elementSize.height) ?
+                                      'top' : 'both');
+                                    visiblePartsMerged = visiblePartX + "-" + visiblePartY;
+                                    if (!inView || inView !== visiblePartsMerged) {
+                                        $element.data('inview', visiblePartsMerged).trigger('inview', [true, visiblePartX, visiblePartY]);
+                                    }
+                                } else if (inView) {
+                                    $element.data('inview', false).trigger('inview', [false]);
+                                }
+                            }
+                        }
+                    }
+
+                    $(w).bind("scroll resize", function () {
+                        viewportSize = viewportOffset = null;
+                    });
+
+                    // IE < 9 scrolls to focused elements without firing the "scroll" event
+                    if (!documentElement.addEventListener && documentElement.attachEvent) {
+                        documentElement.attachEvent("onfocusin", function () {
+                            viewportOffset = null;
+                        });
+                    }
+
+                    // Use setInterval in order to also make sure this captures elements within
+                    // "overflow:scroll" elements or elements that appeared in the dom tree due to
+                    // dom manipulation and reflow
+                    // old: $(window).scroll(checkInView);
+                    //
+                    // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
+                    // intervals while the user scrolls. Therefore the inview event might fire a bit late there
+                    setInterval(checkInView, 250);
+                })(jQuery);
+
+
+
+
+
+
+            </script>
+        }
+        }
+
+
+
+
+        @{if (ViewBag.key == 4)
+        {
+            <script>
+
+
+                $(window).load(function () {
+
+                    var lineChartData = {
+                        labels: ["第一学期", "第二学期", "第三学期", "第四学期"],
+                        datasets: [
+
+                            {
+                                fillColor: "rgba(151,187,205,0.5)",
+                                strokeColor: "rgba(151,187,205,1)",
+                                pointColor: "rgba(151,187,205,1)",
+                                pointStrokeColor: "#fff",
+                                data: [ @ViewBag.averageview1,@ViewBag.averageview2,@ViewBag.averageview3,@ViewBag.averageview4]
+                            }
+                        ]
+                    };
+
+
+
+
+
+
+                    var barChartData = {
+                        labels: ["小于60", "60-69", "70-79", "80-89", "大于等于90"],
+                        datasets: [
+                            {
+                                fillColor: "rgba(151,187,205,0.5)",
+                                strokeColor: "rgba(151,187,205,1)",
+                                data: [@ViewBag.chartdata[0], @ViewBag.chartdata[1], @ViewBag.chartdata[2], @ViewBag.chartdata[3], @ViewBag.chartdata[4]]
+                            }
+                        ]
+
+                    };
+
+
+                    var globalGraphSettings = { animation: Modernizr.canvas };
+
+
+                    showLineChart();
+                    function showLineChart() {
+                        var ctx = document.getElementById("lineChartCanvas").getContext("2d");
+                        new Chart(ctx).Line(lineChartData, globalGraphSettings);
+                    };
+
+
+                    showBarChart();
+                    function showBarChart() {
+                        var ctx = document.getElementById("barChartCanvas").getContext("2d");
+                        new Chart(ctx).Bar(barChartData, globalGraphSettings);
+                    };
+
+                    var graphInitDelay = 300;
+
+                    //Set up each of the inview events here.
+                    $("#lineChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showLineChart, graphInitDelay);
+                    });
+                    $("#barChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showBarChart, graphInitDelay);
+                    });
+
+                    $("#radarChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showRadarChart, graphInitDelay);
+                    });
+                    $("#pieChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showPieChart, graphInitDelay);
+                    });
+                    $("#polarAreaChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showPolarAreaChart, graphInitDelay);
+                    });
+                    $("#doughnutChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showDoughnutChart, graphInitDelay);
+                    });
+
+                });
+
+                /**
+                 * author Christopher Blum
+                 *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
+                 *    - forked from http://github.com/zuk/jquery.inview/
+                 */
+                (function ($) {
+                    var inviewObjects = {}, viewportSize, viewportOffset,
+                        d = document, w = window, documentElement = d.documentElement, expando = $.expando;
+
+                    $.event.special.inview = {
+                        add: function (data) {
+                            inviewObjects[data.guid + "-" + this[expando]] = { data: data, $element: $(this) };
+                        },
+
+                        remove: function (data) {
+                            try { delete inviewObjects[data.guid + "-" + this[expando]]; } catch (e) { }
+                        }
+                    };
+
+                    function getViewportSize() {
+                        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
+
+                        // if this is correct then return it. iPad has compat Mode, so will
+                        // go into check clientHeight/clientWidth (which has the wrong value).
+                        if (!size.height) {
+                            mode = d.compatMode;
+                            if (mode || !$.support.boxModel) { // IE, Gecko
+                                domObject = mode === 'CSS1Compat' ?
+                                    documentElement : // Standards
+                                  d.body; // Quirks
+                                size = {
+                                    height: domObject.clientHeight,
+                                    width: domObject.clientWidth
+                                };
+                            }
+                        }
+
+                        return size;
+                    }
+
+                    function getViewportOffset() {
+                        return {
+                            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
+                            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
+                        };
+                    }
+
+                    function checkInView() {
+                        var $elements = $(), elementsLength, i = 0;
+
+                        $.each(inviewObjects, function (i, inviewObject) {
+                            var selector = inviewObject.data.selector,
+                                $element = inviewObject.$element;
+                            $elements = $elements.add(selector ? $element.find(selector) : $element);
+                        });
+
+                        elementsLength = $elements.length;
+                        if (elementsLength) {
+                            viewportSize = viewportSize || getViewportSize();
+                            viewportOffset = viewportOffset || getViewportOffset();
+
+                            for (; i < elementsLength; i++) {
+                                // Ignore elements that are not in the DOM tree
+                                if (!$.contains(documentElement, $elements[i])) {
+                                    continue;
+                                }
+
+                                var $element = $($elements[i]),
+                                    elementSize = { height: $element.height(), width: $element.width() },
+                                    elementOffset = $element.offset(),
+                                    inView = $element.data('inview'),
+                                    visiblePartX,
+                                    visiblePartY,
+                                    visiblePartsMerged;
+
+                                // Don't ask me why because I haven't figured out yet:
+                                // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
+                                // Even though it sounds weird:
+                                // It seems that the execution of this function is interferred by the onresize/onscroll event
+                                // where viewportOffset and viewportSize are unset
+                                if (!viewportOffset || !viewportSize) {
+                                    return;
+                                }
+
+                                if (elementOffset.top + elementSize.height > viewportOffset.top &&
+                                    elementOffset.top < viewportOffset.top + viewportSize.height &&
+                                    elementOffset.left + elementSize.width > viewportOffset.left &&
+                                    elementOffset.left < viewportOffset.left + viewportSize.width) {
+                                    visiblePartX = (viewportOffset.left > elementOffset.left ?
+                                      'right' : (viewportOffset.left + viewportSize.width) < (elementOffset.left + elementSize.width) ?
+                                      'left' : 'both');
+                                    visiblePartY = (viewportOffset.top > elementOffset.top ?
+                                      'bottom' : (viewportOffset.top + viewportSize.height) < (elementOffset.top + elementSize.height) ?
+                                      'top' : 'both');
+                                    visiblePartsMerged = visiblePartX + "-" + visiblePartY;
+                                    if (!inView || inView !== visiblePartsMerged) {
+                                        $element.data('inview', visiblePartsMerged).trigger('inview', [true, visiblePartX, visiblePartY]);
+                                    }
+                                } else if (inView) {
+                                    $element.data('inview', false).trigger('inview', [false]);
+                                }
+                            }
+                        }
+                    }
+
+                    $(w).bind("scroll resize", function () {
+                        viewportSize = viewportOffset = null;
+                    });
+
+                    // IE < 9 scrolls to focused elements without firing the "scroll" event
+                    if (!documentElement.addEventListener && documentElement.attachEvent) {
+                        documentElement.attachEvent("onfocusin", function () {
+                            viewportOffset = null;
+                        });
+                    }
+
+                    // Use setInterval in order to also make sure this captures elements within
+                    // "overflow:scroll" elements or elements that appeared in the dom tree due to
+                    // dom manipulation and reflow
+                    // old: $(window).scroll(checkInView);
+                    //
+                    // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
+                    // intervals while the user scrolls. Therefore the inview event might fire a bit late there
+                    setInterval(checkInView, 250);
+                })(jQuery);
+
+            </script>
+        }
+        }
+
+
+
+
+
+        @{if (ViewBag.key == 3)
+        {
+            <script>
+
+
+                $(window).load(function () {
+
+                    var lineChartData = {
+                        labels: ["第一学期", "第二学期", "第三学期"],
+                        datasets: [
+
+                            {
+                                fillColor: "rgba(151,187,205,0.5)",
+                                strokeColor: "rgba(151,187,205,1)",
+                                pointColor: "rgba(151,187,205,1)",
+                                pointStrokeColor: "#fff",
+                                data: [ @ViewBag.averageview1,@ViewBag.averageview2,@ViewBag.averageview3]
+                            }
+                        ]
+                    };
+
+
+                    var barChartData = {
+                        labels: ["小于60", "60-69", "70-79", "80-89", "大于等于90"],
+                        datasets: [
+                            {
+                                fillColor: "rgba(151,187,205,0.5)",
+                                strokeColor: "rgba(151,187,205,1)",
+                                data: [@ViewBag.chartdata[0], @ViewBag.chartdata[1], @ViewBag.chartdata[2], @ViewBag.chartdata[3], @ViewBag.chartdata[4]]
+                            }
+                        ]
+
+                    };
+
+
+                    var globalGraphSettings = { animation: Modernizr.canvas };
+
+
+                    showLineChart();
+                    function showLineChart() {
+                        var ctx = document.getElementById("lineChartCanvas").getContext("2d");
+                        new Chart(ctx).Line(lineChartData, globalGraphSettings);
+                    };
+
+
+                    showBarChart();
+                    function showBarChart() {
+                        var ctx = document.getElementById("barChartCanvas").getContext("2d");
+                        new Chart(ctx).Bar(barChartData, globalGraphSettings);
+                    };
+
+                    var graphInitDelay = 300;
+
+                    //Set up each of the inview events here.
+                    $("#lineChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showLineChart, graphInitDelay);
+                    });
+                    $("#barChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showBarChart, graphInitDelay);
+                    });
+
+                    $("#radarChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showRadarChart, graphInitDelay);
+                    });
+                    $("#pieChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showPieChart, graphInitDelay);
+                    });
+                    $("#polarAreaChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showPolarAreaChart, graphInitDelay);
+                    });
+                    $("#doughnutChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showDoughnutChart, graphInitDelay);
+                    });
+
+                });
+
+                /**
+                 * author Christopher Blum
+                 *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
+                 *    - forked from http://github.com/zuk/jquery.inview/
+                 */
+                (function ($) {
+                    var inviewObjects = {}, viewportSize, viewportOffset,
+                        d = document, w = window, documentElement = d.documentElement, expando = $.expando;
+
+                    $.event.special.inview = {
+                        add: function (data) {
+                            inviewObjects[data.guid + "-" + this[expando]] = { data: data, $element: $(this) };
+                        },
+
+                        remove: function (data) {
+                            try { delete inviewObjects[data.guid + "-" + this[expando]]; } catch (e) { }
+                        }
+                    };
+
+                    function getViewportSize() {
+                        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
+
+                        // if this is correct then return it. iPad has compat Mode, so will
+                        // go into check clientHeight/clientWidth (which has the wrong value).
+                        if (!size.height) {
+                            mode = d.compatMode;
+                            if (mode || !$.support.boxModel) { // IE, Gecko
+                                domObject = mode === 'CSS1Compat' ?
+                                    documentElement : // Standards
+                                  d.body; // Quirks
+                                size = {
+                                    height: domObject.clientHeight,
+                                    width: domObject.clientWidth
+                                };
+                            }
+                        }
+
+                        return size;
+                    }
+
+                    function getViewportOffset() {
+                        return {
+                            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
+                            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
+                        };
+                    }
+
+                    function checkInView() {
+                        var $elements = $(), elementsLength, i = 0;
+
+                        $.each(inviewObjects, function (i, inviewObject) {
+                            var selector = inviewObject.data.selector,
+                                $element = inviewObject.$element;
+                            $elements = $elements.add(selector ? $element.find(selector) : $element);
+                        });
+
+                        elementsLength = $elements.length;
+                        if (elementsLength) {
+                            viewportSize = viewportSize || getViewportSize();
+                            viewportOffset = viewportOffset || getViewportOffset();
+
+                            for (; i < elementsLength; i++) {
+                                // Ignore elements that are not in the DOM tree
+                                if (!$.contains(documentElement, $elements[i])) {
+                                    continue;
+                                }
+
+                                var $element = $($elements[i]),
+                                    elementSize = { height: $element.height(), width: $element.width() },
+                                    elementOffset = $element.offset(),
+                                    inView = $element.data('inview'),
+                                    visiblePartX,
+                                    visiblePartY,
+                                    visiblePartsMerged;
+
+                                // Don't ask me why because I haven't figured out yet:
+                                // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
+                                // Even though it sounds weird:
+                                // It seems that the execution of this function is interferred by the onresize/onscroll event
+                                // where viewportOffset and viewportSize are unset
+                                if (!viewportOffset || !viewportSize) {
+                                    return;
+                                }
+
+                                if (elementOffset.top + elementSize.height > viewportOffset.top &&
+                                    elementOffset.top < viewportOffset.top + viewportSize.height &&
+                                    elementOffset.left + elementSize.width > viewportOffset.left &&
+                                    elementOffset.left < viewportOffset.left + viewportSize.width) {
+                                    visiblePartX = (viewportOffset.left > elementOffset.left ?
+                                      'right' : (viewportOffset.left + viewportSize.width) < (elementOffset.left + elementSize.width) ?
+                                      'left' : 'both');
+                                    visiblePartY = (viewportOffset.top > elementOffset.top ?
+                                      'bottom' : (viewportOffset.top + viewportSize.height) < (elementOffset.top + elementSize.height) ?
+                                      'top' : 'both');
+                                    visiblePartsMerged = visiblePartX + "-" + visiblePartY;
+                                    if (!inView || inView !== visiblePartsMerged) {
+                                        $element.data('inview', visiblePartsMerged).trigger('inview', [true, visiblePartX, visiblePartY]);
+                                    }
+                                } else if (inView) {
+                                    $element.data('inview', false).trigger('inview', [false]);
+                                }
+                            }
+                        }
+                    }
+
+                    $(w).bind("scroll resize", function () {
+                        viewportSize = viewportOffset = null;
+                    });
+
+                    // IE < 9 scrolls to focused elements without firing the "scroll" event
+                    if (!documentElement.addEventListener && documentElement.attachEvent) {
+                        documentElement.attachEvent("onfocusin", function () {
+                            viewportOffset = null;
+                        });
+                    }
+
+                    // Use setInterval in order to also make sure this captures elements within
+                    // "overflow:scroll" elements or elements that appeared in the dom tree due to
+                    // dom manipulation and reflow
+                    // old: $(window).scroll(checkInView);
+                    //
+                    // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
+                    // intervals while the user scrolls. Therefore the inview event might fire a bit late there
+                    setInterval(checkInView, 250);
+                })(jQuery);
+
+            </script>
+        }
+        }
+
+
+
+
+
+
+        @{if (ViewBag.key == 2)
+        {
+            <script>
+
+
+                $(window).load(function () {
+
+                    var lineChartData = {
+                        labels: ["第一学期", "第二学期"],
+                        datasets: [
+
+                            {
+                                fillColor: "rgba(151,187,205,0.5)",
+                                strokeColor: "rgba(151,187,205,1)",
+                                pointColor: "rgba(151,187,205,1)",
+                                pointStrokeColor: "#fff",
+                                data: [ @ViewBag.averageview1,@ViewBag.averageview2]
+                            }
+                        ]
+                    };
+
+
+
+
+
+
+                    var barChartData = {
+                        labels: ["小于60", "60-69", "70-79", "80-89", "大于等于90"],
+                        datasets: [
+                            {
+                                fillColor: "rgba(151,187,205,0.5)",
+                                strokeColor: "rgba(151,187,205,1)",
+                                data: [@ViewBag.chartdata[0], @ViewBag.chartdata[1], @ViewBag.chartdata[2], @ViewBag.chartdata[3], @ViewBag.chartdata[4]]
+                            }
+                        ]
+
+                    };
+
+
+                    var globalGraphSettings = { animation: Modernizr.canvas };
+
+
+                    showLineChart();
+                    function showLineChart() {
+                        var ctx = document.getElementById("lineChartCanvas").getContext("2d");
+                        new Chart(ctx).Line(lineChartData, globalGraphSettings);
+                    };
+
+
+                    showBarChart();
+                    function showBarChart() {
+                        var ctx = document.getElementById("barChartCanvas").getContext("2d");
+                        new Chart(ctx).Bar(barChartData, globalGraphSettings);
+                    };
+
+                    var graphInitDelay = 300;
+
+                    //Set up each of the inview events here.
+                    $("#lineChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showLineChart, graphInitDelay);
+                    });
+                    $("#barChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showBarChart, graphInitDelay);
+                    });
+
+                    $("#radarChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showRadarChart, graphInitDelay);
+                    });
+                    $("#pieChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showPieChart, graphInitDelay);
+                    });
+                    $("#polarAreaChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showPolarAreaChart, graphInitDelay);
+                    });
+                    $("#doughnutChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showDoughnutChart, graphInitDelay);
+                    });
+
+                });
+
+                /**
+                 * author Christopher Blum
+                 *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
+                 *    - forked from http://github.com/zuk/jquery.inview/
+                 */
+                (function ($) {
+                    var inviewObjects = {}, viewportSize, viewportOffset,
+                        d = document, w = window, documentElement = d.documentElement, expando = $.expando;
+
+                    $.event.special.inview = {
+                        add: function (data) {
+                            inviewObjects[data.guid + "-" + this[expando]] = { data: data, $element: $(this) };
+                        },
+
+                        remove: function (data) {
+                            try { delete inviewObjects[data.guid + "-" + this[expando]]; } catch (e) { }
+                        }
+                    };
+
+                    function getViewportSize() {
+                        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
+
+                        // if this is correct then return it. iPad has compat Mode, so will
+                        // go into check clientHeight/clientWidth (which has the wrong value).
+                        if (!size.height) {
+                            mode = d.compatMode;
+                            if (mode || !$.support.boxModel) { // IE, Gecko
+                                domObject = mode === 'CSS1Compat' ?
+                                    documentElement : // Standards
+                                  d.body; // Quirks
+                                size = {
+                                    height: domObject.clientHeight,
+                                    width: domObject.clientWidth
+                                };
+                            }
+                        }
+
+                        return size;
+                    }
+
+                    function getViewportOffset() {
+                        return {
+                            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
+                            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
+                        };
+                    }
+
+                    function checkInView() {
+                        var $elements = $(), elementsLength, i = 0;
+
+                        $.each(inviewObjects, function (i, inviewObject) {
+                            var selector = inviewObject.data.selector,
+                                $element = inviewObject.$element;
+                            $elements = $elements.add(selector ? $element.find(selector) : $element);
+                        });
+
+                        elementsLength = $elements.length;
+                        if (elementsLength) {
+                            viewportSize = viewportSize || getViewportSize();
+                            viewportOffset = viewportOffset || getViewportOffset();
+
+                            for (; i < elementsLength; i++) {
+                                // Ignore elements that are not in the DOM tree
+                                if (!$.contains(documentElement, $elements[i])) {
+                                    continue;
+                                }
+
+                                var $element = $($elements[i]),
+                                    elementSize = { height: $element.height(), width: $element.width() },
+                                    elementOffset = $element.offset(),
+                                    inView = $element.data('inview'),
+                                    visiblePartX,
+                                    visiblePartY,
+                                    visiblePartsMerged;
+
+                                // Don't ask me why because I haven't figured out yet:
+                                // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
+                                // Even though it sounds weird:
+                                // It seems that the execution of this function is interferred by the onresize/onscroll event
+                                // where viewportOffset and viewportSize are unset
+                                if (!viewportOffset || !viewportSize) {
+                                    return;
+                                }
+
+                                if (elementOffset.top + elementSize.height > viewportOffset.top &&
+                                    elementOffset.top < viewportOffset.top + viewportSize.height &&
+                                    elementOffset.left + elementSize.width > viewportOffset.left &&
+                                    elementOffset.left < viewportOffset.left + viewportSize.width) {
+                                    visiblePartX = (viewportOffset.left > elementOffset.left ?
+                                      'right' : (viewportOffset.left + viewportSize.width) < (elementOffset.left + elementSize.width) ?
+                                      'left' : 'both');
+                                    visiblePartY = (viewportOffset.top > elementOffset.top ?
+                                      'bottom' : (viewportOffset.top + viewportSize.height) < (elementOffset.top + elementSize.height) ?
+                                      'top' : 'both');
+                                    visiblePartsMerged = visiblePartX + "-" + visiblePartY;
+                                    if (!inView || inView !== visiblePartsMerged) {
+                                        $element.data('inview', visiblePartsMerged).trigger('inview', [true, visiblePartX, visiblePartY]);
+                                    }
+                                } else if (inView) {
+                                    $element.data('inview', false).trigger('inview', [false]);
+                                }
+                            }
+                        }
+                    }
+
+                    $(w).bind("scroll resize", function () {
+                        viewportSize = viewportOffset = null;
+                    });
+
+                    // IE < 9 scrolls to focused elements without firing the "scroll" event
+                    if (!documentElement.addEventListener && documentElement.attachEvent) {
+                        documentElement.attachEvent("onfocusin", function () {
+                            viewportOffset = null;
+                        });
+                    }
+
+                    // Use setInterval in order to also make sure this captures elements within
+                    // "overflow:scroll" elements or elements that appeared in the dom tree due to
+                    // dom manipulation and reflow
+                    // old: $(window).scroll(checkInView);
+                    //
+                    // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
+                    // intervals while the user scrolls. Therefore the inview event might fire a bit late there
+                    setInterval(checkInView, 250);
+                })(jQuery);
+
+
+
+
+
+
+            </script>
+        }
+        }
+
+
+
+        @{if (ViewBag.key == 1)
+        {
+            <script>
+
+
+                $(window).load(function () {
+
+                    var lineChartData = {
+                        labels: ["第一学期"],
+                        datasets: [
+
+                            {
+                                fillColor: "rgba(151,187,205,0.5)",
+                                strokeColor: "rgba(151,187,205,1)",
+                                pointColor: "rgba(151,187,205,1)",
+                                pointStrokeColor: "#fff",
+                                data: [ @ViewBag.averageview1]
+                            }
+                        ]
+                    };
+
+
+
+
+
+
+                    var barChartData = {
+                        labels: ["小于60", "60-69", "70-79", "80-89", "大于等于90"],
+                        datasets: [
+                            {
+                                fillColor: "rgba(151,187,205,0.5)",
+                                strokeColor: "rgba(151,187,205,1)",
+                                data: [@ViewBag.chartdata[0], @ViewBag.chartdata[1], @ViewBag.chartdata[2], @ViewBag.chartdata[3], @ViewBag.chartdata[4]]
+                            }
+                        ]
+
+                    };
+
+
+                    var globalGraphSettings = { animation: Modernizr.canvas };
+
+
+                    showLineChart();
+                    function showLineChart() {
+                        var ctx = document.getElementById("lineChartCanvas").getContext("2d");
+                        new Chart(ctx).Line(lineChartData, globalGraphSettings);
+                    };
+
+
+                    showBarChart();
+                    function showBarChart() {
+                        var ctx = document.getElementById("barChartCanvas").getContext("2d");
+                        new Chart(ctx).Bar(barChartData, globalGraphSettings);
+                    };
+
+                    var graphInitDelay = 300;
+
+                    //Set up each of the inview events here.
+                    $("#lineChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showLineChart, graphInitDelay);
+                    });
+                    $("#barChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showBarChart, graphInitDelay);
+                    });
+
+                    $("#radarChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showRadarChart, graphInitDelay);
+                    });
+                    $("#pieChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showPieChart, graphInitDelay);
+                    });
+                    $("#polarAreaChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showPolarAreaChart, graphInitDelay);
+                    });
+                    $("#doughnutChart").on("inview", function () {
+                        var $this = $(this);
+                        $this.removeClass("hidden").off("inview");
+                        setTimeout(showDoughnutChart, graphInitDelay);
+                    });
+
+                });
+
+                /**
+                 * author Christopher Blum
+                 *    - based on the idea of Remy Sharp, http://remysharp.com/2009/01/26/element-in-view-event-plugin/
+                 *    - forked from http://github.com/zuk/jquery.inview/
+                 */
+                (function ($) {
+                    var inviewObjects = {}, viewportSize, viewportOffset,
+                        d = document, w = window, documentElement = d.documentElement, expando = $.expando;
+
+                    $.event.special.inview = {
+                        add: function (data) {
+                            inviewObjects[data.guid + "-" + this[expando]] = { data: data, $element: $(this) };
+                        },
+
+                        remove: function (data) {
+                            try { delete inviewObjects[data.guid + "-" + this[expando]]; } catch (e) { }
+                        }
+                    };
+
+                    function getViewportSize() {
+                        var mode, domObject, size = { height: w.innerHeight, width: w.innerWidth };
+
+                        // if this is correct then return it. iPad has compat Mode, so will
+                        // go into check clientHeight/clientWidth (which has the wrong value).
+                        if (!size.height) {
+                            mode = d.compatMode;
+                            if (mode || !$.support.boxModel) { // IE, Gecko
+                                domObject = mode === 'CSS1Compat' ?
+                                    documentElement : // Standards
+                                  d.body; // Quirks
+                                size = {
+                                    height: domObject.clientHeight,
+                                    width: domObject.clientWidth
+                                };
+                            }
+                        }
+
+                        return size;
+                    }
+
+                    function getViewportOffset() {
+                        return {
+                            top: w.pageYOffset || documentElement.scrollTop || d.body.scrollTop,
+                            left: w.pageXOffset || documentElement.scrollLeft || d.body.scrollLeft
+                        };
+                    }
+
+                    function checkInView() {
+                        var $elements = $(), elementsLength, i = 0;
+
+                        $.each(inviewObjects, function (i, inviewObject) {
+                            var selector = inviewObject.data.selector,
+                                $element = inviewObject.$element;
+                            $elements = $elements.add(selector ? $element.find(selector) : $element);
+                        });
+
+                        elementsLength = $elements.length;
+                        if (elementsLength) {
+                            viewportSize = viewportSize || getViewportSize();
+                            viewportOffset = viewportOffset || getViewportOffset();
+
+                            for (; i < elementsLength; i++) {
+                                // Ignore elements that are not in the DOM tree
+                                if (!$.contains(documentElement, $elements[i])) {
+                                    continue;
+                                }
+
+                                var $element = $($elements[i]),
+                                    elementSize = { height: $element.height(), width: $element.width() },
+                                    elementOffset = $element.offset(),
+                                    inView = $element.data('inview'),
+                                    visiblePartX,
+                                    visiblePartY,
+                                    visiblePartsMerged;
+
+                                // Don't ask me why because I haven't figured out yet:
+                                // viewportOffset and viewportSize are sometimes suddenly null in Firefox 5.
+                                // Even though it sounds weird:
+                                // It seems that the execution of this function is interferred by the onresize/onscroll event
+                                // where viewportOffset and viewportSize are unset
+                                if (!viewportOffset || !viewportSize) {
+                                    return;
+                                }
+
+                                if (elementOffset.top + elementSize.height > viewportOffset.top &&
+                                    elementOffset.top < viewportOffset.top + viewportSize.height &&
+                                    elementOffset.left + elementSize.width > viewportOffset.left &&
+                                    elementOffset.left < viewportOffset.left + viewportSize.width) {
+                                    visiblePartX = (viewportOffset.left > elementOffset.left ?
+                                      'right' : (viewportOffset.left + viewportSize.width) < (elementOffset.left + elementSize.width) ?
+                                      'left' : 'both');
+                                    visiblePartY = (viewportOffset.top > elementOffset.top ?
+                                      'bottom' : (viewportOffset.top + viewportSize.height) < (elementOffset.top + elementSize.height) ?
+                                      'top' : 'both');
+                                    visiblePartsMerged = visiblePartX + "-" + visiblePartY;
+                                    if (!inView || inView !== visiblePartsMerged) {
+                                        $element.data('inview', visiblePartsMerged).trigger('inview', [true, visiblePartX, visiblePartY]);
+                                    }
+                                } else if (inView) {
+                                    $element.data('inview', false).trigger('inview', [false]);
+                                }
+                            }
+                        }
+                    }
+
+                    $(w).bind("scroll resize", function () {
+                        viewportSize = viewportOffset = null;
+                    });
+
+                    // IE < 9 scrolls to focused elements without firing the "scroll" event
+                    if (!documentElement.addEventListener && documentElement.attachEvent) {
+                        documentElement.attachEvent("onfocusin", function () {
+                            viewportOffset = null;
+                        });
+                    }
+
+                    // Use setInterval in order to also make sure this captures elements within
+                    // "overflow:scroll" elements or elements that appeared in the dom tree due to
+                    // dom manipulation and reflow
+                    // old: $(window).scroll(checkInView);
+                    //
+                    // By the way, iOS (iPad, iPhone, ...) seems to not execute, or at least delays
+                    // intervals while the user scrolls. Therefore the inview event might fire a bit late there
+                    setInterval(checkInView, 250);
+                })(jQuery);
+
+
+
+
+
+
+            </script>
+        }
+        }
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+    </div>
+
+</body>
+</html>

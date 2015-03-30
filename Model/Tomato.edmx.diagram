@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5d66d4b127d94a82a4029a8f60caa52a" Name="Diagram1">
+        <EntityTypeShape EntityType="TomatoModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TomatoModel.T001账号表" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TomatoModel.T002验证表" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TomatoModel.T003用户角色表" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TomatoModel.T006店铺信息表" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="TomatoModel.T007店铺货物表" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="TomatoModel.FK_T002验证表" ManuallyRouted="false" />
+        <AssociationConnector Association="TomatoModel.FK_T003用户角色表" ManuallyRouted="false" />
+        <AssociationConnector Association="TomatoModel.FK_T006店铺信息表" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TomatoModel.T004社团信息表" Width="1.5" PointX="9.625" PointY="4" />
+        <EntityTypeShape EntityType="TomatoModel.T005票务表" Width="1.5" PointX="14.125" PointY="4.25" />
+        <EntityTypeShape EntityType="TomatoModel.T008海报信息表" Width="1.5" PointX="11.875" PointY="4" />
+        <EntityTypeShape EntityType="TomatoModel.T009社团账号表" Width="1.5" PointX="7.375" PointY="4.625" />
+        <AssociationConnector Association="TomatoModel.FK_T005票务表T001" />
+        <AssociationConnector Association="TomatoModel.FK_T004社团信息表" />
+        <AssociationConnector Association="TomatoModel.FK_T008海报信息表" />
+        <AssociationConnector Association="TomatoModel.FK_T005票务表T008" />
+        <AssociationConnector Association="TomatoModel.FK_T007ShopGoods_T006店铺信息表1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

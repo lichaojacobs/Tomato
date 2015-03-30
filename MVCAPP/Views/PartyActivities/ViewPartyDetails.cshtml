@@ -1,0 +1,267 @@
+﻿
+@{
+    ViewBag.Title = "ViewPartyDetails";
+}
+@model ViewModel.PartyInformationModel
+
+
+
+<link rel="stylesheet" href="../../Content/button/css/font-awesome.min.css">
+<link rel="stylesheet" href="../../Content/button/css/buttons.css">
+
+
+
+
+
+
+  <!--导航栏-->
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Tomato</a>
+        </div>
+        <!--[logo]>
+        <a class="navbar-brand" href="#">
+        </a> <!-->
+        <ul class="nav navbar-nav " role="tablist">
+            <li><a href="/Home/Index">首页</a></li>
+            <li class="active"><a href="/PartyActivities/PartyIndex">社团互动</a></li>
+            <li><a href="/MarketDownstairs/MarketIndex">楼下小铺</a></li>
+            <li><a href="#">新生指南</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            @if (User.IsInRole("社团"))
+            {
+                // [@Html.ActionLink("个人中心", "PersonalInfo", "Account")]
+                //[ @Html.ActionLink("注销", "LogOff", "Account") ]
+                <li style="color:white">
+                    <a>欢迎<small>@User.Identity.Name !</small></a>
+                </li>
+                <li><a href="/PartyActivities/SetPartyInfo?partyName=@User.Identity.Name">社团中心</a></li>
+                <li><a href="/Account/LogOff">注销</a></li>
+
+
+
+            }
+            @if (!User.IsInRole("社团"))
+            {
+
+                <li><a href="/Account/PartyLoginIndex">登陆/注册</a></li>
+
+            }
+        </ul>
+    </div>
+</nav>
+
+
+
+
+<div class="container" style="background-color:#fff;height:800px;">
+
+    <div style="background-color:#fff; display:block;position:relative;top:54px;">
+        <div style="background-color:#fff;display:block;position:relative; ">
+            &nbsp;&nbsp;&nbsp;
+            @if (Model.partyInfo.partyLogo != null)
+            {
+                <img src="@Model.partyInfo.partyLogo" style="width:150px;height:150px;" class="img-circle" />
+            }
+            else
+            {
+                <img src="~/Content/Images/default.jpg" style="width:150px;height:150px;" class="img-circle" />
+            }
+
+            <div  style="display:block; position:absolute;left:200px;top:10px;">
+                <fieldset>
+
+                    <div class="editor-label">
+                        <label>社团名称：</label>
+                        &nbsp;&nbsp;&nbsp;
+                        @Html.DisplayFor(m => m.partyInfo.partyName)
+                    </div>
+
+
+
+                    <div class="editor-label">
+                        <label>社团宗旨：</label>
+                        &nbsp;&nbsp;&nbsp;
+                        @Html.DisplayFor(m => m.partyInfo.partyPurpose)
+                    </div>
+
+
+
+                    <div class="editor-label">
+                        <label>社团性质：</label>
+                        &nbsp;&nbsp;&nbsp;
+                        @Html.DisplayFor(m => m.partyInfo.partyProperty)
+                    </div>
+                    <div class="editor-label">
+                        <label>社团使命：</label>
+                        &nbsp;&nbsp;&nbsp;
+                        @Html.DisplayFor(m => m.partyInfo.partyTask)
+                    </div>
+
+
+                    <div class="editor-label">
+                        <label>建立时间:</label>
+                        &nbsp;&nbsp;&nbsp;
+                        @Html.DisplayFor(m => m.partyInfo.partyFoundingTime)
+
+                    </div>
+
+                </fieldset>
+
+            </div>
+
+           
+
+        </div>
+
+
+        @*导航菜单*@
+        <ul class="nav nav-tabs" contenteditable="true" style="background-color:#eee7e7;width:100%">
+                <li id="partivitydetail" class="active"><a onclick="GetInfoDetail()" role="button">详细信息</a></li>
+
+                <li id="activities"><a onclick="GetActivitiesDetail()" role="button">社团活动</a></li>
+
+       </ul>
+
+        @*显示社团的详细信息模块*@
+        <div aria-multiline="True" style=" background-color:#fff ;overflow:scroll;height:auto;">
+           
+                <div id="party-info" style="display:block; position:relative;top:10px;">
+                    <fieldset>
+
+                        <div class="editor-label">
+                            <label>社团名称：</label>
+                            &nbsp;&nbsp;&nbsp;
+                            @*@Html.TextBoxFor(m => m.partyName, new { @class = "form-control", placeholder = "社团名称", style = "disabled" })*@
+                            <input class="form-control" type="text" value="@Model.partyInfo.partyName" disabled />
+
+                        </div>
+
+
+
+                        <div class="editor-label">
+                            <label>社团宗旨：</label>
+                            &nbsp;&nbsp;&nbsp;
+                            @*@Html.TextBoxFor(m => m.partyPurpose, new { @class = "form-control", placeholder = "社团宗旨" })*@
+
+                            <input class="form-control" type="text" value="@Model.partyInfo.partyPurpose" disabled />
+                        </div>
+
+
+
+                        <div class="editor-label">
+                            <label>社团性质：</label>
+                            &nbsp;&nbsp;&nbsp;
+                            @*@Html.TextBoxFor(m => m.partyProperty, new { @class = "form-control", placeholder = "社团性质" })*@
+                            <input class="form-control" type="text" value="@Model.partyInfo.partyProperty" disabled />
+                        </div>
+                        <div class="editor-label">
+                            <label>社团使命：</label>
+                            &nbsp;&nbsp;&nbsp;
+                            @*@Html.TextBoxFor(m => m.partyTask, new { @class = "form-control", placeholder = "社团使命" })*@
+                            <input class="form-control" type="text" value="@Model.partyInfo.partyTask" disabled />
+                        </div>
+                        <div class="editor-label">
+                            <label>社团活动：</label>
+                            &nbsp;&nbsp;&nbsp;
+                            @*@Html.TextBoxFor(m => m.partyActivities, new { @class = "form-control", placeholder = "社团活动" })*@
+                            <input class="form-control" type="text" value="@Model.partyInfo.partyActivities" disabled />
+                        </div>
+
+                        <div class="editor-label">
+                            <label>社团成员:</label>
+                            &nbsp;&nbsp;&nbsp;
+                            @*@Html.TextBoxFor(m => m.partyMembers, new { @class = "form-control", placeholder = "社团成员" })*@
+                            <input class="form-control" type="text" value="@Model.partyInfo.partyMembers" disabled />
+                        </div>
+                        <div class="editor-label">
+                            <label>建立时间:</label>
+                            &nbsp;&nbsp;&nbsp;
+                            @*@Html.TextBoxFor(m => m.partyFoundingTime, new { @class = "form-control", placeholder = "建立时间" })*@
+                            <input class="form-control" type="text" value="@Model.partyInfo.partyFoundingTime" disabled />
+
+
+                        </div>
+                        <div class="editor-label">
+                            <label>社团简介:</label>
+                            &nbsp;&nbsp;&nbsp;
+                            @*@Html.TextAreaFor(m => m.partyDescribe, new { @class = "form-control", placeholder = "社团简介" })*@
+                            <textarea class="form-control" disabled>@Model.partyInfo.partyDescribe</textarea>
+
+                        </div>
+                      
+                    </fieldset>
+                </div>
+        </div>
+
+
+        @*显示海报信息*@
+        <div id="post-info" style="display:none; background-color:#fff">
+            @if (Model.listPostInfo.Count() != 0)
+            { 
+                
+            <div class="row">
+                @foreach (var i in Model.listPostInfo)
+                {
+                    <div class="col-sm-6 col-md-4" style="border:1px;">
+                        <div class="thumbnail">
+                            @if (i.postPhotoURL != null)
+                            {
+                                <img data-src="holder.js/100%x150" alt="100%x200" src="@i.postPhotoURL" style="height: 150px; width: 100%; display: block;">
+
+                            }
+                            else
+                            {
+                                <img data-src="holder.js/100%x150" alt="100%x200" src="~/Content/Images/default.jpg" style="height: 150px; width: 100%; display: block;">
+                            }
+
+                            <h2>@i.postName</h2>
+                            <p>时间： @i.postBeginTime ——@i.postEndTime</p>
+                            <p>抢票时间:@i.postTicketBeginTime——@i.postTicketEndTime</p>
+                            <p>票数：@i.postTicketNumber</p>
+                            <hr style="border:none;" />
+                            <p>
+                                <a class="btn btn-primary" href="/PartyActivities/PostInformation?postName=@i.postName" role="button">进入抢票</a>
+                            </p>
+                        </div>
+                    </div>
+                    
+                }
+
+            </div><!--/row-->
+            }
+            else
+            {
+                <h2>该社团暂无活动！！</h2> 
+            }
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function GetInfoDetail()
+    {
+        document.getElementById("post-info").style.display = "none";
+        document.getElementById("party-info").style.display = "block";
+        document.getElementById("partivitydetail").className = "active";
+        document.getElementById("activities").className = "";
+    }
+    function GetActivitiesDetail()
+    {
+        document.getElementById("party-info").style.display = "none";
+        document.getElementById("post-info").style.display = "block";
+        document.getElementById("activities").className = "active";
+        document.getElementById("partivitydetail").className = "";
+
+    }
+</script>

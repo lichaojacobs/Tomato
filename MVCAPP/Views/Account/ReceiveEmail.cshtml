@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "验证页面";
+}
+
+<link href="~/Content/css/flat-ui.css" rel="stylesheet" />
+
+
+<!--导航栏-->
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Tomato</a>
+        </div>
+        <!--[logo]>
+        <a class="navbar-brand" href="#">
+        </a> <!-->
+        <ul class="nav navbar-nav " role="tablist">
+            <li class="active"><a href="/Home/Index">首页</a></li>
+            <li><a href="/PartyActivities/PartyIndex">社团互动</a></li>
+            <li><a href="/MarketDownstairs/MarketIndex">楼下小铺</a></li>
+            <li><a href="#">新生指南</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            @if (User.IsInRole("普通用户"))
+            {
+                // [@Html.ActionLink("个人中心", "PersonalInfo", "Account")]
+                //[ @Html.ActionLink("注销", "LogOff", "Account") ]
+                <li style="color:white">
+                    <a>欢迎<small>@User.Identity.Name !</small></a>
+                </li>
+                <li><a href="/Account/PersonalInfo">个人中心</a></li>
+                <li><a href="/Account/LogOff">注销</a></li>
+
+
+
+            }
+            @if (!User.IsInRole("普通用户"))
+            {
+
+                <li><a href="/Account/Reviselogin">登陆/注册</a></li>
+
+            }
+        </ul>
+
+
+    </div>
+</nav>
+
+
+<div style="display:block;position:relative;top:60px;" onload="setTimeout('reload()',3000)">
+    <h2>恭喜您激活成功</h2>
+</div>
+
+<script type="text/javascript">
+    function reload()
+    {
+        window.location = '/Account/Reviselogin';
+    }
+    
+    
+    
+
+</script>

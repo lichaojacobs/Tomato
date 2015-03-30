@@ -1,0 +1,56 @@
+﻿@{
+    Layout = null;
+}
+
+
+@model ViewModel.MyGoodModel
+
+<div class="container" style="background-color:#fff">
+
+        @if (Model.MyMallGood.Count != 0)
+        {
+            <div class="row row-offcanvas row-offcanvas-right">
+
+                <div class="col-xs-12 col-sm-9">
+
+                    <div class="row">
+                        @foreach (var i in Model.MyMallGood)
+                        {
+                            <div class="col-6 col-sm-6 col-lg-4" style="border:1px;">
+                                <h2>@i.GoodName</h2>
+                                <p>简介： @i.GoodIntroduction</p>
+                                <p>数量： @i.GoodNumber</p>
+                                <p>价格（元）： @i.GoodPrice</p>
+                                <img src="@i.GoodPhoto" style="width:150px;height:60px;" />
+                                <p>
+                                    <a class="btn btn-default" href="/MarketDownstairs/GetDetail?id=@i.GoodID" role="button">View details</a>
+                                    <a class="btn btn-default" href="/MarketDownstairs/DeleteGood?id=@i.GoodID" role="button">Delte this</a>
+                                </p>
+                            </div>
+                        }
+
+                    </div><!--/row-->
+                </div><!--/span-->
+
+                <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+                    <div class="list-group">
+
+                    </div>
+                </div><!--/span-->
+            </div><!--/row-->
+        }
+        else
+        {
+            <h2>
+                暂无商品
+            </h2>
+        }
+
+    
+
+</div><!--/.container-->
+@*<div class="pager">
+
+        @Html.pagelinks(Model.pageInfo, X => Url.Action("GetMyMallGoods", new { page = X }))
+
+    </div>*@

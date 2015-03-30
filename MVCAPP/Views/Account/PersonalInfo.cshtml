@@ -1,0 +1,201 @@
+﻿@{
+    ViewBag.Title = "个人中心";
+}
+@model ViewModel.UserInfo
+
+
+
+<!--导航栏-->
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Tomato</a>
+        </div>
+        <!--[logo]>
+        <a class="navbar-brand" href="#">
+        </a> <!-->
+        <ul class="nav navbar-nav " role="tablist">
+            <li><a href="/Home/Index">首页</a></li>
+            <li><a href="/PartyActivities/PartyIndex">社团互动</a></li>
+            <li><a href="/MarketDownstairs/MarketIndex">楼下小铺</a></li>
+            <li><a href="#">新生指南</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            @if (User.IsInRole("普通用户"))
+            {
+                // [@Html.ActionLink("个人中心", "PersonalInfo", "Account")]
+                //[ @Html.ActionLink("注销", "LogOff", "Account") ]
+                <li style="color:white">
+                    <a>欢迎<small>@User.Identity.Name !</small></a>
+                </li>
+                <li class="active"><a href="/Account/PersonalInfo">个人中心</a></li>
+                <li><a href="/Account/LogOff">注销</a></li>
+
+            }
+            @if (!User.IsInRole("普通用户"))
+            {
+
+                <li><a href="/Account/Reviselogin">登陆/注册</a></li>
+
+            }
+        </ul>
+    </div>
+</nav>
+
+<div class="container" style="background-color:#fff;height:600px;">
+    <div style="display:block;position:relative;top:50px;">
+        <div>
+            <h2><font style="font-weight:bolder">个人中心</font></h2>
+
+        </div>
+
+        <div style="display:block;position:absolute;left:150px; top:0px;">
+
+            <ul class="nav nav-pills" role="tablist" style="background-color:#fff">
+
+                <li class="active"><button class="btn btn-default" role="button">个人信息</button> </li>
+                <li><button class="btn btn-default" role="button" onclick="window.location='/Account/UpdatePassword'">修改密码</button></li>
+
+                <li><button class="btn btn-default" role="button" onclick="window.location='/MarketDownstairs/Notice'">消息中心</button></li>
+            </ul>
+        </div>
+
+        <div id="userindex" style="display:block;position:relative;left:150px;">
+            @if (Model.photoUrl == null)
+            {
+                <img src="~/Content/Images/test1.jpg" style=" width:300px;height:381px;" />
+            }
+            else
+            {
+                <img src="@Model.photoUrl" style=" width:300px;height:381px;" />
+            }
+            <hr style="border:none;" />
+            <div>上传头像(300x381且小于1M照片)：</div>
+
+            <div class="file-box">
+                @using (Html.BeginForm("PersonalInfo", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+
+                    <input type='text' name='textfield' id='textfield' class='txt' />
+                    <input type='button' class='btn' value='浏览...' />
+                    <input type="file" name="image" class="file" id="fileField" size="28" onchange="document.getElementById('textfield').value=this.value" />
+                    <input type="submit" name="submit" class="btn" value="上传" />
+
+                }
+            </div>
+            @*展示个人信息的div布局*@
+
+            <div id="user-info" style="display:block;position:absolute;left:400px; top:50px; border:dashed;">
+                <table align="center">
+                    <tr>
+                        <td><h3> 用户名：</h3></td>
+                        <td><input class="form-control" type="text" value="@Model.username" disabled /></td>
+                    </tr>
+                    <tr>
+                        <td><h3>用户邮箱：</h3></td>
+                        <td><input class="form-control" type="text" value="@Model.email" disabled /></td>
+                    </tr>
+                    <tr>
+                        <td><h3>用户昵称：</h3></td>
+                        <td><input class="form-control" type="text" value="@Model.nickname" disabled /></td>
+                    </tr>
+                    <tr>
+                        <td><h3>用户角色:</h3></td>
+                        <td><input class="form-control" type="text" value="@Model.Roles.FirstOrDefault()" disabled /></td>
+                    </tr>
+                    <tr>
+                        <td><h3>用户状态:</h3></td>
+                        <td><input class="form-control" type="text" value="@Model.UserState" disabled /></td>
+                    </tr>
+                    <tr style="text-align:center">
+                        <td colspan="2">
+                            <button class="btn btn-lg btn-default" onclick="changeUserData()">修改信息</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            @using (Html.BeginForm("PersonalInfo", "Account", FormMethod.Post))
+            {
+
+
+                <div id="user-infofrom" style="display:none;position:absolute;left:400px; top:50px; border:dashed;">
+                    <table align="center">
+                        @Html.HiddenFor(m => m.email)
+                        <tr>
+                            <td><h3> 用户名：</h3></td>
+                            @*<td><input class="form-control" type="text" value="@Model.username"  /></td>*@
+                            <td>
+                                @Html.TextBoxFor(m => m.username, new { @class = "form-control", type = "text" })
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><h3>用户昵称：</h3></td>
+                            @*<td><input class="form-control" type="text" value="@Model.nickname" disabled /></td>*@
+                            <td>
+                                @Html.TextBoxFor(m => m.nickname, new { @class = "form-control", type = "text" })
+                            </td>
+
+                        </tr>
+                        <tr style="text-align:center">
+                            <td colspan="2">
+                                <button class="btn btn-lg btn-default" type="submit">完成修改</button>
+                            </td>
+                        </tr>
+
+
+                    </table>
+                </div>
+            }
+
+        </div>
+
+
+
+
+
+    </div>
+
+</div>
+<script type="text/javascript">
+    function changeUserData() {
+        document.getElementById("user-info").style.display = "none";
+        document.getElementById("user-infofrom").style.display = "block";
+    }
+
+</script>
+
+<style type="text/css">
+    .file-box {
+        position: relative;
+        width: 340px;
+    }
+
+    .txt {
+        height: 30px;
+        border: 1px solid #cdcdcd;
+        width: 180px;
+    }
+
+
+
+    .file {
+        position: absolute;
+        top: 0;
+        right: 80px;
+        height: 24px;
+        filter: alpha(opacity:0);
+        opacity: 0;
+        width: 260px;
+    }
+</style>
+
+

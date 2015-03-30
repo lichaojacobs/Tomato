@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0DA9166A-9A10-4821-9C79-9BFB3F3C4B63}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Model</RootNamespace>
+    <AssemblyName>Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\MVCAPP\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>Tomato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T001账号表.cs">
+      <DependentUpon>Tomato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T002验证表.cs">
+      <DependentUpon>Tomato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T003用户角色表.cs">
+      <DependentUpon>Tomato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T004社团信息表.cs">
+      <DependentUpon>Tomato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T005票务表.cs">
+      <DependentUpon>Tomato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T006店铺信息表.cs">
+      <DependentUpon>Tomato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T007店铺货物表.cs">
+      <DependentUpon>Tomato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T008海报信息表.cs">
+      <DependentUpon>Tomato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T009社团账号表.cs">
+      <DependentUpon>Tomato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tomato.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tomato.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tomato.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tomato.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tomato.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tomato.edmx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Tomato.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Tomato.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Tomato.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Tomato.edmx</DependentUpon>
+      <LastGenOutput>Tomato.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Tomato.edmx.diagram">
+      <DependentUpon>Tomato.edmx</DependentUpon>
+    </None>
+    <None Include="Tomato.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Tomato.edmx</DependentUpon>
+      <LastGenOutput>Tomato.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

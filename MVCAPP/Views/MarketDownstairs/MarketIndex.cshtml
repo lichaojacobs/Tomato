@@ -1,0 +1,154 @@
+﻿@{
+    ViewBag.Title = "楼下小铺";
+
+}
+
+@model ViewModel.GoodsListModel
+@using Common
+
+
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Tomato</a>
+        </div>
+        <!--[logo]>
+        <a class="navbar-brand" href="#">
+        </a> <!-->
+        <ul class="nav navbar-nav " role="tablist">
+            <li><a href="/Home/Index">首页</a></li>
+            <li><a href="/PartyActivities/PartyIndex">社团互动</a></li>
+            <li class="active"><a href="/MarketDownstairs/MarketIndex">楼下小铺</a></li>
+            <li><a href="#">新生指南</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            @if (User.IsInRole("普通用户"))
+            {
+                // [@Html.ActionLink("个人中心", "PersonalInfo", "Account")]
+                //[ @Html.ActionLink("注销", "LogOff", "Account") ]
+                <li style="color:white">
+                    <a>欢迎<small>@User.Identity.Name !</small></a>
+                </li>
+                <li><a href="/MarketDownstairs/MyMall">我的商店</a></li>
+                <li><a href="/Account/LogOff">注销</a></li>
+
+            }
+            @if (!User.IsInRole("普通用户"))
+            {
+
+                <li><a href="/Account/Reviselogin">登陆/注册</a></li>
+
+            }
+        </ul>
+
+
+
+    </div>
+</nav>
+
+<div class="container" style="background-color:#fff;height:auto; width:100%">
+   
+    <div style="display:block;position:relative;top:60px;">
+        <div class="row row-offcanvas row-offcanvas-right" >
+
+            <div class="col-xs-12 col-sm-9">
+                <p class="pull-right visible-xs">
+                    <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+                </p>
+                <div class="jumbotron">
+                    <h1>楼下小铺！</h1>
+                    @using (Html.BeginForm("GetRightGoods", "MarketDownstairs"))
+                    {
+                        @*<label>Tags:</label>
+                            <input id="tags" class="ui-autocomplete-input" placeholder="搜索" name="keyWords" />
+                            <button type="submit" class="btn btn-sm btn-default">搜索</button>*@
+
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="搜索" name="keyWords">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">Go!</button>
+                                </span>
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+
+
+                    }
+                </div>
+                <div class="row">
+                    @foreach (var i in Model.goodsList)
+                    {
+                        <div class="col-sm-6 col-md-4" style="border:1px;">
+                            <div class="thumbnail">
+                                <div>
+                                    <img data-src="holder.js/100%x150" alt="100%x200" src="@i.GoodPhoto" style="height: 150px; width: 100%; display: block;position:relative;" onmouseover="showfavortag()" onmouseout="    hidefavortag()">
+                                </div>
+                                
+                                <div id="favorphoto"   style="height:150px;width:297px;background-color:lightblue;opacity: 0.4;filter:alpha(opacity=50);display:none;position:absolute;top:0px;">
+                                    
+
+                                </div>
+                                <h2>@i.GoodName</h2>
+                                <p>简介： @i.GoodIntroduction</p>
+                                <p>数量： @i.GoodNumber</p>
+                                <p>价格（元）： @i.GoodPrice</p>
+                                <hr style="border:none;" />
+                                <p>
+                                    <a class="btn btn-primary" href="/MarketDownstairs/GetDetail?id=@i.GoodID" role="button">View details</a>
+                                </p>
+                            </div>
+                        </div>
+                    }
+
+                </div><!--/row-->
+            </div><!--/span-->
+
+
+
+        </div><!--/row-->
+        <div>
+            <ul class="pagination">
+                <li><a href="#">&laquo;</a></li>
+                @for (int i = 1; i <= @Model.pageInfo.totalpages; i++)
+            {
+
+                    <li><a href="/MarketDownstairs/MarketIndex?page=@i">@i </a></li>
+
+            }
+
+                <li><a href="#">&raquo;</a></li>
+
+            </ul>
+        </div>
+    </div> 
+
+  
+
+</div><!--/.container-->
+
+<script type="text/javascript">
+    
+    function showfavortag() {
+
+        document.getElementById("favorphoto").style.display = "block";
+
+    }
+    function hidefavortag() {
+
+        document.getElementById("favorphoto").style.display = "none";
+
+    }
+
+</script>
+
+
+
+

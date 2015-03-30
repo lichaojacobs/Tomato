@@ -1,0 +1,614 @@
+﻿@{
+    ViewBag.Title = "自习室查询";
+}
+
+
+<link href="~/Content/css/scojs.css" rel="stylesheet" />
+<link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/modernizr/2.8.2/modernizr.min.js"></script>
+
+
+    <!--导航栏-->
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Tomato</a>
+            </div>
+            <!--[logo]>
+            <a class="navbar-brand" href="#">
+            </a> <!-->
+            <ul class="nav navbar-nav " role="tablist">
+                <li class="active"><a href="/Home/Index">首页</a></li>
+                <li><a href="/PartyActivities/PartyIndex">社团互动</a></li>
+                <li><a href="/MarketDownstairs/MarketIndex">楼下小铺</a></li>
+                <li><a href="#">新生指南</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                @if (User.IsInRole("普通用户"))
+                {
+                    // [@Html.ActionLink("个人中心", "PersonalInfo", "Account")]
+                    //[ @Html.ActionLink("注销", "LogOff", "Account") ]
+                <li style="color:white">
+                    <a>欢迎<small>@User.Identity.Name !</small></a>
+                </li>
+                <li><a href="/Account/PersonalInfo">个人中心</a></li>
+                <li><a href="/Account/LogOff">注销</a></li>
+
+
+
+                }
+                @if (!User.IsInRole("普通用户"))
+                {
+
+                <li><a href="/Account/Reviselogin">登陆/注册</a></li>
+
+                }
+            </ul>
+
+
+        </div>
+    </nav>
+
+
+
+
+    <div style="display:block;position:relative;top:60px;">
+
+        @using (Html.BeginForm())
+        {
+            <blockquote>
+                <h4>
+                    <span class="glyphicon glyphicon-time"></span> 第 @ViewBag.weeknum 周 <input type="submit" class="btn btn-default" value="tomorrow" />
+                    <small>星期 @ViewBag.weekday</small>
+                </h4>
+            </blockquote>
+        }
+
+
+
+        <section id="tab" class="col-sm-6">
+            整块时间
+            <ul class="nav nav-tabs" data-trigger="tab" data-easing="slide">
+                <li><a href="#">23楼</a></li>
+                <li><a href="#">24楼</a></li>
+                <li><a href="#">26 A</a></li>
+                <li><a href="#">26 B</a></li>
+            </ul>
+            <div class="pane-wrapper">
+                <div>
+                    <p>
+                        @{
+
+                            <div class="sidenav">
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav" class="active">上午</a>
+                                <div class="collapsible">
+
+                                    @{for (int j = 0; j < ViewBag.resultlist1[0].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist1[0][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">下午</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist1[1].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist1[1][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">晚上</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist1[2].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist1[2][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+                            </div>
+
+
+                        }
+
+
+                    </p>
+                </div>
+
+
+                <div>
+                    <p>
+                        @{
+                            <div class="sidenav">
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav" class="active">上午</a>
+                                <div class="collapsible">
+
+                                    @{for (int j = 0; j < ViewBag.resultlist2[0].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist2[0][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">下午</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist2[1].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist2[1][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">晚上</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist2[2].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist2[2][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </p>
+                </div>
+
+                <div>
+                    <p>
+                        @{
+                            <div class="sidenav">
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav" class="active">上午</a>
+                                <div class="collapsible">
+
+                                    @{for (int j = 0; j < ViewBag.resultlist3[0].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist3[0][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">下午</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist3[1].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist3[1][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">晚上</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist3[2].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist3[2][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </p>
+                </div>
+
+                <div>
+                    <p>
+                        @{
+                            <div class="sidenav">
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav" class="active">上午</a>
+                                <div class="collapsible">
+
+                                    @{for (int j = 0; j < ViewBag.resultlist4[0].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist4[0][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">下午</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist4[1].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist4[1][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">晚上</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist4[2].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist4[2][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+
+
+        <section id="tab" class="col-sm-6">
+            整节时间
+            <ul class="nav nav-tabs" data-trigger="tab" data-easing="slide">
+                <li><a href="#">23楼</a></li>
+                <li><a href="#">24楼</a></li>
+                <li><a href="#">26 A</a></li>
+                <li><a href="#">26 B</a></li>
+            </ul>
+            <div class="pane-wrapper">
+                <div>
+                    <p>
+                        @{
+
+                            <div class="sidenav">
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav" class="active">上午第一节</a>
+                                <div class="collapsible">
+
+                                    @{for (int j = 0; j < ViewBag.resultlist1[3].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist1[3][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">上午第二节</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist1[4].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist1[4][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">下午第一节</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist1[5].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist1[5][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">下午第二节</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist1[6].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist1[6][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">晚上第一节</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist1[7].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist1[7][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">晚上第一节</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist1[8].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist1[8][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+
+                            </div>
+
+
+                        }
+
+
+                    </p>
+                </div>
+
+
+                <div>
+                    <p>
+                        @{
+                            <div class="sidenav">
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav" class="active">上午第一节</a>
+                                <div class="collapsible">
+
+                                    @{for (int j = 0; j < ViewBag.resultlist2[3].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist2[3][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">上午第二节</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist2[4].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist2[4][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">下午第一节</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist2[5].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist2[5][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">下午第二节</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist2[6].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist2[6][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">晚上第一节</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist2[7].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist2[7][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">晚上第一节</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist2[8].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist2[8][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+
+                            </div>
+                        }
+                    </p>
+                </div>
+
+                <div>
+                    <p>
+                        @{
+                            <div class="sidenav">
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav" class="active">上午第一节</a>
+                                <div class="collapsible">
+
+                                    @{for (int j = 0; j < ViewBag.resultlist3[3].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist3[3][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">上午第二节</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist3[4].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist3[4][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">下午第一节</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist3[5].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist3[5][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">下午第二节</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist3[6].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist3[6][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">晚上第一节</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist3[7].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist3[7][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">晚上第一节</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist3[8].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist3[8][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+
+                            </div>
+                        }
+                    </p>
+                </div>
+
+                <div>
+                    <p>
+                        @{
+                            <div class="sidenav">
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav" class="active">上午第一节</a>
+                                <div class="collapsible">
+
+                                    @{for (int j = 0; j < ViewBag.resultlist4[3].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist4[3][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">上午第二节</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist4[4].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist4[4][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">下午第一节</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist4[5].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist4[5][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">下午第二节</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist4[6].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist4[6][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">晚上第一节</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist4[7].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist4[7][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+                                <a href="#" data-trigger="collapse" data-parent=".sidenav">晚上第一节</a>
+                                <div class="collapsible" style="display: none">
+                                    @{for (int j = 1; j < ViewBag.resultlist4[8].Count; j++)
+                                    {
+
+                                        @ViewBag.resultlist4[8][j];
+                                        <br>
+                                    }
+                                    }
+                                </div>
+
+
+                            </div>
+                        }
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+
+
+
+
+    <script src="~/Content/js/sco.panes.js"></script>
+    <script src="~/Content/js/sco.collapse.js"></script>
+    <script src="~/Content/js/sco.tab.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+

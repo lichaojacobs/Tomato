@@ -1,0 +1,233 @@
+﻿@{
+    Layout = null;
+}
+
+
+@model ViewModel.UpLoadGoodModel
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!--为移动设备进行优化-->
+    <title>UploadGood</title>
+    <!-- Bootstrap -->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../Content/css/unsliderstyle.css">
+
+    @*扁平化样式*@
+    @*<link href="~/Content/css/flat-ui.css" rel="stylesheet" />*@
+    <style type="text/css">
+        .banner {
+            position: relative;
+            overflow: auto;
+        }
+
+            .banner li {
+                list-style: none;
+            }
+
+            .banner ul li {
+                float: left;
+            }
+    </style>    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="~/Content/js/jquery.js"></script>
+    <script src="~/Content/js/ajaxfileupload.js"></script>
+    <script src="~/Content/js/uploadImage.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Tomato</a>
+            </div>
+            <!--[logo]>
+            <a class="navbar-brand" href="#">
+            </a> <!-->
+            <ul class="nav navbar-nav " role="tablist">
+                <li><a href="/Home/Index">首页</a></li>
+                <li><a href="/PartyActivities/PartyIndex">社团互动</a></li>
+                <li class="active"><a href="/MarketDownstairs/MarketIndex">楼下小铺</a></li>
+                <li><a href="#">新生指南</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                @if (User.IsInRole("普通用户"))
+                {
+                    // [@Html.ActionLink("个人中心", "PersonalInfo", "Account")]
+                    //[ @Html.ActionLink("注销", "LogOff", "Account") ]
+                    <li style="color:white">
+                        <a>欢迎<small>@User.Identity.Name !</small></a>
+                    </li>
+                    <li><a href="/MarketDownstairs/MyMall">我的商店</a></li>
+                    <li><a href="/Account/LogOff">注销</a></li>
+
+                }
+                @if (!User.IsInRole("普通用户"))
+                {
+
+                    <li><a href="/Account/Reviselogin">登陆/注册</a></li>
+
+                }
+            </ul>
+
+
+
+        </div>
+    </nav>
+
+    <div class="container" style="background-color:#fff">
+        <div style="height:600px;display:block; position:relative; top:60px; ">
+
+
+            <div style="display:block;position:relative;left:20px;top:20px;">
+                @using (Html.BeginForm("UploadGood", "MarketDownstairs", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+                {
+                    @Html.HiddenFor(m => m.shopId)
+                    <div class="editor-field">
+                        <label>商品名称：</label>
+                        @Html.TextBoxFor(model => model.GoodName, new { @class = "form-control", placeholder = "商品名", style = "width:500px;height:50px" })
+                    </div>
+
+
+                    <div class="editor-field">
+                        <label>商品数量：</label>
+                        @Html.TextBoxFor(model => model.GoodNumber, new { @class = "form-control", placeholder = "商品数量", style = "width:500px;height:50px" })
+                    </div>
+
+                    <div class="editor-field">
+                        <label>商品价格(元)：</label>
+                        @Html.TextBoxFor(model => model.GoodPrice, new { @class = "form-control", placeholder = "商品价格", style = "width:500px;height:50px" })
+                    </div>
+                    <div class="editor-label">
+                        <label>商品简介：</label>
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextAreaFor(model => model.Introduction, new { placeholder = "商品简介", style = "width:500px;height:100px" })
+                    </div>
+                    //异步上传图片后作为传递图片地址的媒介
+                    <input type="text" id="imageAddress" name="imageAddress" value="" style="visibility:hidden">
+
+                    <div class="editor-field">
+                        <button class="btn btn-lg btn-primary">确定</button>
+                    </div>
+                }
+
+                <div>
+                    <label>
+                        上传照片：
+                    </label>
+                    <div class="file-box">
+                        <input type='text' name='textfield' id='textfield' class='txt' />
+                        <input type='button' class='btn' value='浏览...' />
+                        <input type="file" name="image" class="file" id="image" size="28" onchange="document.getElementById('textfield').value=this.value,uploadimage()" />
+                        @*<input type="submit" name="submit" class="btn" value="上传" />*@
+
+
+                    </div>
+                    <div id="showimage" style="display:none">
+                        <img id="imagebox" src="" style="width:200px;height:200px;" />
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+</body>
+</html>
+
+
+@*<script src="http://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>*@
+
+<script src="~/Content/js/unslider.js"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="~/Content/js/bootstrap.min.js"></script>
+
+<script>
+                    if (window.chrome) {
+                        $('.banner li').css('background-size', '100% 100%');
+                    }
+
+                    $('.banner').unslider({
+                        speed: 500,
+                        delay: 3000,
+                        arrows: true,
+                        fluid: true,
+                        dots: true
+                    });
+
+                    //  Find any element starting with a # in the URL
+                    //  And listen to any click events it fires
+                    $('a[href^="#"]').click(function () {
+                        //  Find the target element
+                        var target = $($(this).attr('href'));
+
+                        //  And get its position
+                        var pos = target.offset(); // fallback to scrolling to top || {left: 0, top: 0};
+
+                        //  jQuery will return false if there's no element
+                        //  and your code will throw errors if it tries to do .offset().left;
+                        if (pos) {
+                            //  Scroll the page
+                            $('html, body').animate({
+                                scrollTop: pos.top,
+                                scrollLeft: pos.left
+                            }, 1000);
+                        }
+
+                        //  Don't let them visit the url, we'll scroll you there
+                        return false;
+                    });
+
+
+</script>
+
+<style type="text/css">
+    .file-box {
+        position: relative;
+        width: 340px;
+    }
+
+    .txt {
+        height: 30px;
+        border: 1px solid #cdcdcd;
+        width: 180px;
+    }
+
+
+
+    .file {
+        position: absolute;
+        top: 0;
+        right: 80px;
+        height: 24px;
+        filter: alpha(opacity:0);
+        opacity: 0;
+        width: 260px;
+    }
+</style>
+
